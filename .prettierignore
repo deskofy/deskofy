@@ -1,0 +1,24 @@
+# Ignore everything recursively
+
+*
+
+# Except for files that are not ignored
+
+!*.js
+!*.mjs
+!*.jsx
+!*.ts
+!*.tsx
+!*.json
+!*.html
+!*.css
+!*.scss
+!*.md
+
+# Check subdirectories too
+
+!*/
+
+# Ignore specific files
+
+*.min.js
