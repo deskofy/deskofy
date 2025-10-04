@@ -11,6 +11,7 @@
     "app:build:watch": "turbo run app:build:watch",
     "app:run": "turbo run app:run",
     "app:start": "turbo run app:start",
+    "app:types": "turbo run app:types",
     "app:lint": "turbo run app:lint",
     "app:fmt": "turbo run app:fmt"
   },
