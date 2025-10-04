@@ -1,0 +1,14 @@
+version: "3"
+
+silent: true
+
+tasks:
+  githooks-setup:
+    description: setup git hooks
+    cmds:
+      - |
+        hook_scripts=("commit-msg" "post-commit" "pre-commit" "pre-push")
+        for script in "${hook_scripts[@]}"; do
+          cp "./scripts/development/githooks/${script}.sh" ".git/hooks/${script}"
+          chmod +x ".git/hooks/${script}"
+        done
