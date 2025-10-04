@@ -1,7 +1,7 @@
 {
   environment: 'testing',
   name: 'MyDeskofyApp',
-  domain: 'https://vemetric.com',
+  domain: 'https://google.com',
   icons: {
     mac: 'assets/icons/mac/icon.icns',
     windows: 'assets/icons/windows/icon.ico',
