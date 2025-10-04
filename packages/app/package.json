@@ -1,0 +1,43 @@
+{
+  "name": "@deskofy/app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The Electron Framework",
+  "author": "Deskofy",
+  "license": "MIT",
+  "repository": "deskofy/deskofy",
+  "bugs": "https://github.com/deskofy/deskofy/issues",
+  "homepage": "https://deskofy.app",
+  "main": "dist/index.js",
+  "keywords": [
+    "electron",
+    "framework",
+    "web",
+    "server",
+    "node",
+    "front-end",
+    "backend",
+    "core",
+    "deskofy",
+    "tvative"
+  ],
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "app:build": "tsc",
+    "app:build:watch": "tsc -w",
+    "app:run": "cross-env DESKOFY_APP_CONFIG=../test/deskofy.config.json5 electron ./dist/main.js",
+    "app:start": "cross-env ENV=testing && npm run app:build && npm run app:run",
+    "app:types": "tsc --noEmit --skipLibCheck",
+    "app:lint": "eslint .",
+    "app:fmt": "prettier --write ."
+  },
+  "devDependencies": {
+    "ajv": "8.17.1",
+    "cross-env": "10.0.0",
+    "electron-builder": "26.0.12",
+    "electron": "38.1.1",
+    "json5": "2.2.3"
+  }
+}

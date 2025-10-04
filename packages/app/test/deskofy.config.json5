@@ -1,0 +1,55 @@
+{
+  environment: 'testing',
+  name: 'MyDeskofyApp',
+  domain: 'https://vemetric.com',
+  icons: {
+    mac: 'assets/icons/mac/icon.icns',
+    windows: 'assets/icons/windows/icon.ico',
+    linux: 'assets/icons/linux/icon.png',
+  },
+  windowStartup: {
+    shouldShowBeforeLoadingComplete: false,
+  },
+  windowSize: {
+    height: 800,
+    width: 1200,
+    minHeight: 600,
+    minWidth: 800,
+  },
+  windowLayout: {
+    shouldHideTitleBar: false,
+    shouldEnableFrame: true,
+    shouldDisableAutoHideCursor: false,
+    shouldHaveRoundCorners: true,
+    shouldEnableShadows: true,
+  },
+  windowOptions: {
+    shouldMovable: true,
+    shouldMinimizable: true,
+    shouldMaximizable: true,
+    shouldClosable: true,
+    shouldFocusable: true,
+    shouldFullscreenable: true,
+    shouldRestoreState: false,
+  },
+  windowColors: {
+    dark: '#1e1e1e',
+    light: '#ffffff',
+  },
+  externalLinks: {
+    shouldOpenNonAppLinksExternally: true,
+  },
+  htmlPages: {
+    offline: "offline.html",
+    httpNotAllowed: ["pages", "forbidden.html"],
+  },
+  development: {
+    shouldOpenDevToolsWhenRun: true,
+  },
+  highRisk: {
+    shouldLoadHTTPDomains: false,
+    shouldEnableWebSecurity: true,
+    shouldAllowRunningInsecureContent: false,
+    shouldEnableExperimentalFeatures: false,
+  },
+}
