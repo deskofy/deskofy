@@ -13,6 +13,9 @@
     "app:start": {
       "cache": false
     },
+    "app:types": {
+      "cache": false
+    },
     "app:lint": {
       "cache": false
     },
