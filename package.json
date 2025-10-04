@@ -1,0 +1,26 @@
+{
+	"name": "deskofy",
+	"version": "0.0.0",
+	"private": true,
+	"workspaces": [
+		"packages/*"
+	],
+	"packageManager": "npm@10.0.0",
+	"scripts": {
+		"app:build": "turbo run app:build",
+		"app:build:watch": "turbo run app:build:watch",
+		"app:run": "turbo run app:run",
+		"app:start": "turbo run app:start",
+		"app:lint": "turbo run app:lint",
+		"app:fmt": "turbo run app:fmt"
+	},
+	"devDependencies": {
+		"turbo": "2.5.8",
+		"@eslint/compat": "1.2.9",
+		"@trivago/prettier-plugin-sort-imports": "5.2.2",
+		"eslint": "9.28.0",
+		"prettier": "3.5.3",
+		"typescript-eslint": "8.44.0",
+		"typescript": "5.9.2"
+	}
+}
