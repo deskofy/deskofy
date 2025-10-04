@@ -1,6 +1,6 @@
 <h1 align="center">Deskofy (TS) - Public Preview</h1>
 
-<p align="center"><tt>An Electron Framework for Modern Web-to-Desktop Apps</tt></p>
+<p align="center">An Electron Framework for Modern Web-to-Desktop Apps</p>
 
 <p align="center">
     <a href="https://deskofy.com" target="_blank">Platform</a>

@@ -1,11 +1,26 @@
 {
   "$schema": "https://turborepo.com/schema.json",
   "tasks": {
-    "app:build": {},
-    "app:build:watch": {},
-    "app:run": {},
-    "app:start": {},
-    "app:lint": {},
-    "app:fmt": {}
+    "app:build": {
+      "cache": false
+    },
+    "app:build:watch": {
+      "cache": false
+    },
+    "app:run": {
+      "cache": false
+    },
+    "app:start": {
+      "cache": false
+    },
+    "app:types": {
+      "cache": false
+    },
+    "app:lint": {
+      "cache": false
+    },
+    "app:fmt": {
+      "cache": false
+    }
   }
 }
