@@ -71,8 +71,5 @@ jobs:
       - name: Setup npm packages
         run: npm ci
 
-      - name: Build packages
-        run: npm run pkg:build
-
       - name: Type check app package
         run: npm run app:types
