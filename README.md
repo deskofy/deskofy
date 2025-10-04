@@ -12,7 +12,7 @@
     <a href="https://x.com/DeskofyHQ" target="_blank">X</a>
 </p>
 
-> [!INFO]
+> [!NOTE]
 >
 > **Deskofy** is made for founders, indie developers, and early-stage startups building web-based products.
 >
