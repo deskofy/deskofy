@@ -1,6 +1,6 @@
 {
   "name": "@deskofy/cli",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "private": true,
   "description": "The CLI Utility for Deskofy",
   "author": "Deskofy",
@@ -36,10 +36,7 @@
     "cli:fmt": "prettier --write ."
   },
   "dependencies": {
-    "@deskofy/app": "*"
-  },
-  "devDependencies": {
-    "@types/yargs": "17.0.33",
+    "@deskofy/app": "*",
     "yargs": "18.0.0",
     "ajv": "8.17.1",
     "cross-env": "10.0.0",
@@ -47,7 +44,10 @@
     "@inquirer/prompts": "7.8.6",
     "chalk": "5.6.2",
     "listr2": "9.0.4",
-    "cross-spawn": "7.0.6",
+    "cross-spawn": "7.0.6"
+  },
+  "devDependencies": {
+    "@types/yargs": "17.0.33",
     "@types/cross-spawn": "6.0.6"
   }
 }
