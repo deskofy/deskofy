@@ -31,12 +31,13 @@
     "app:start": "cross-env ENV=testing && npm run app:build && npm run app:run",
     "app:types": "tsc --noEmit --skipLibCheck",
     "app:lint": "eslint .",
-    "app:fmt": "prettier --write ."
+    "app:fmt": "prettier --write .",
+    "npm:pack": "npm pack",
+    "npm:publish": "npm publish"
   },
-  "devDependencies": {
+  "dependencies": {
     "ajv": "8.17.1",
     "cross-env": "10.0.0",
-    "electron-builder": "26.0.12",
     "electron": "38.1.1",
     "json5": "2.2.3"
   }
