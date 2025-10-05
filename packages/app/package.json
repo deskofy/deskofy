@@ -1,10 +1,10 @@
 {
   "name": "@deskofy/app",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "private": true,
   "description": "The Electron Framework",
   "author": "Deskofy",
-  "license": "MIT",
+  "license": "SEE LICENSE",
   "repository": "deskofy/deskofy",
   "bugs": "https://github.com/deskofy/deskofy/issues",
   "homepage": "https://deskofy.app",
@@ -27,7 +27,7 @@
   "scripts": {
     "app:build": "tsc",
     "app:build:watch": "tsc -w",
-    "app:run": "cross-env DESKOFY_APP_CONFIG=../test/deskofy.config.json5 electron ./dist/main.js",
+    "app:run": "cross-env DESKOFY_APP_CONFIG=test/deskofy.config.json5 electron ./dist/main.js",
     "app:start": "cross-env ENV=testing && npm run app:build && npm run app:run",
     "app:types": "tsc --noEmit --skipLibCheck",
     "app:lint": "eslint .",
