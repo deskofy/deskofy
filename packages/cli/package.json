@@ -1,0 +1,53 @@
+{
+  "name": "@deskofy/cli",
+  "version": "0.0.1",
+  "private": true,
+  "description": "The CLI Utility for Deskofy",
+  "author": "Deskofy",
+  "license": "SEE LICENSE",
+  "repository": "deskofy/cli",
+  "bugs": "https://github.com/deskofy/deskofy/issues",
+  "homepage": "https://deskofy.app",
+  "main": "dist/index.js",
+  "bin": {
+    "deskofy": "./dist/index.js"
+  },
+  "keywords": [
+    "cli",
+    "electron",
+    "framework",
+    "web",
+    "server",
+    "node",
+    "front-end",
+    "backend",
+    "core",
+    "deskofy",
+    "tvative"
+  ],
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "cli:build": "tsc",
+    "cli:build:watch": "tsc -w",
+    "cli:types": "tsc --noEmit --skipLibCheck",
+    "cli:lint": "eslint .",
+    "cli:fmt": "prettier --write ."
+  },
+  "dependencies": {
+    "@deskofy/app": "*"
+  },
+  "devDependencies": {
+    "@types/yargs": "17.0.33",
+    "yargs": "18.0.0",
+    "ajv": "8.17.1",
+    "cross-env": "10.0.0",
+    "json5": "2.2.3",
+    "@inquirer/prompts": "7.8.6",
+    "chalk": "5.6.2",
+    "listr2": "9.0.4",
+    "cross-spawn": "7.0.6",
+    "@types/cross-spawn": "6.0.6"
+  }
+}
