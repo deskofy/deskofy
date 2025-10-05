@@ -13,7 +13,13 @@
     "app:start": "turbo run app:start",
     "app:types": "turbo run app:types",
     "app:lint": "turbo run app:lint",
-    "app:fmt": "turbo run app:fmt"
+    "app:fmt": "turbo run app:fmt",
+    "cli:build": "turbo run cli:build",
+    "cli:build:watch": "turbo run cli:build:watch",
+    "cli:types": "turbo run cli:types",
+    "cli:lint": "turbo run cli:lint",
+    "cli:fmt": "turbo run cli:fmt",
+    "test:cli:01": "npx deskofy run tests/01/deskofy.config.json5"
   },
   "devDependencies": {
     "turbo": "2.5.8",
