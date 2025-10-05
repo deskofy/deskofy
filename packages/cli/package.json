@@ -36,7 +36,9 @@
     "cli:build:watch": "tsc -w",
     "cli:types": "tsc --noEmit --skipLibCheck",
     "cli:lint": "eslint .",
-    "cli:fmt": "prettier --write ."
+    "cli:fmt": "prettier --write .",
+    "app:npm:pack": "npm pack",
+    "app:npm:publish": "npm publish --access public"
   },
   "dependencies": {
     "@deskofy/app": "*",
