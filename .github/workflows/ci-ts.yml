@@ -53,6 +53,9 @@ jobs:
       - name: Lint app package
         run: npm run app:lint
 
+      - name: Lint cli package
+        run: npm run cli:lint
+
   type_check_ts:
     name: Type Check TypeScript
     runs-on: ubuntu-latest
@@ -73,3 +76,6 @@ jobs:
 
       - name: Type check app package
         run: npm run app:types
+
+      - name: Type check cli package
+        run: npm run cli:types
