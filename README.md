@@ -22,6 +22,24 @@
 
 **Deskofy TS (Deskofy TypeScript)** is a **cross-platform framework** built on top of **Electron** to help developers build and distribute **production-ready native desktop applications** with **minimal engineering effort**.
 
+## Quick Start
+
+```bash
+# Install Deskofy CLI globally
+
+npm install -g @deskofy/cli
+
+# Create a new Deskofy project
+
+npx deskofy create
+
+# Run your Deskofy project
+
+npx deskofy run deskofy.config.json5
+
+# 🎉 Boom! Your first Deskofy application has been created successfully!
+```
+
 ## Repository Structure
 
 This monorepo **`deskofy/deskofy`** contains the following main packages:
@@ -39,9 +57,9 @@ The ecosystem includes:
 - **Open-Source Framework (this repository)**: freely available and extensible.
 - **Managed Infrastructure (closed-source)**: will be available at [deskofy.app](https://deskofy.app?utm_source=deskofy-repository), providing build orchestration, cloud deployments, and analytics.
 
-## Getting Started
+## Documentation
 
-> TODO
+The documentation will be available soon.
 
 ## Contributing
 
@@ -68,7 +86,7 @@ Please read our [Code of Conduct](./CODE_OF_CONDUCT.md) before contributing.
 ## License
 
 Deskofy is distributed under a **custom open-source license**,
-which you can find in the [LICENSE](./LICENSE) file.
+which you can find in the [LICENSE](https://github.com/deskofy/deskofy?tab=License-1-ov-file) file.
 
 > ⚠️ Please review the license carefully before using Deskofy in a commercial context.
 
