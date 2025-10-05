@@ -1,11 +1,14 @@
 {
   "name": "@deskofy/cli",
   "version": "0.0.0",
-  "private": true,
+  "private": false,
   "description": "The CLI Utility for Deskofy",
   "author": "Deskofy",
   "license": "SEE LICENSE",
-  "repository": "deskofy/cli",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deskofy/deskofy.git"
+  },
   "bugs": "https://github.com/deskofy/deskofy/issues",
   "homepage": "https://deskofy.app",
   "main": "dist/index.js",

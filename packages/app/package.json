@@ -1,11 +1,14 @@
 {
   "name": "@deskofy/app",
   "version": "0.0.0",
-  "private": true,
+  "private": false,
   "description": "The Electron Framework",
   "author": "Deskofy",
   "license": "SEE LICENSE",
-  "repository": "deskofy/deskofy",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deskofy/deskofy.git"
+  },
   "bugs": "https://github.com/deskofy/deskofy/issues",
   "homepage": "https://deskofy.app",
   "main": "dist/index.js",
@@ -32,8 +35,8 @@
     "app:types": "tsc --noEmit --skipLibCheck",
     "app:lint": "eslint .",
     "app:fmt": "prettier --write .",
-    "npm:pack": "npm pack",
-    "npm:publish": "npm publish"
+    "app:npm:pack": "npm pack",
+    "app:npm:publish": "npm publish --access public"
   },
   "dependencies": {
     "ajv": "8.17.1",
