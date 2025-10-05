@@ -17,7 +17,10 @@ type TLoadConfigResponse = {
 };
 
 const loadConfig = (configPath: string): TLoadConfigResponse => {
-  const resolvedPath = path.join(__dirname, configPath);
+  const resolvedPath = path.isAbsolute(configPath)
+    ? configPath
+    : path.resolve(process.cwd(), configPath);
+
   const parsedJSON = JSON5.parse(
     fs.readFileSync(resolvedPath, 'utf-8'),
   ) as TLoadConfigResponse;
