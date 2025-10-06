@@ -1,6 +1,8 @@
 type TDeskofyConfigSchema = {
   environment: string;
   name: string;
+  description: string;
+  author: string;
   packageName: string;
   version: string;
   domain: string;
@@ -65,6 +67,8 @@ const CONFIG_SCHEMA = {
   properties: {
     environment: { type: 'string' },
     name: { type: 'string' },
+    description: { type: 'string', default: 'A Deskofy Application' },
+    author: { type: 'string', default: 'Deskofy' },
     packageName: { type: 'string' },
     version: { type: 'string', default: '0.0.0' },
     domain: { type: 'string' },
@@ -247,7 +251,7 @@ const CONFIG_SCHEMA = {
       },
     },
   },
-  required: ['environment', 'name', 'domain'],
+  required: ['environment', 'name', 'domain', 'packageName'],
   additionalProperties: false,
 };
 
