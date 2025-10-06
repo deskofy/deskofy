@@ -1,3 +1,4 @@
+import { TDeskofyConfigSchema } from '@deskofy/config';
 import {
   app,
   BrowserWindow,
@@ -7,11 +8,9 @@ import {
   nativeTheme,
   shell,
 } from 'electron';
-import esbuild from 'esbuild';
-import fs from 'fs/promises';
+import fs from 'fs-extra';
 import path from 'path';
 
-import { TDeskofyConfigSchema } from './config/schema';
 import { CONFIG_ENVS } from './global';
 import { registerIpcContexts } from './ipc/register';
 import { loadConfig } from './load';
@@ -214,21 +213,43 @@ ipcMain.handle('internal:config:get', (): TDeskofyConfigSchema => userConfig);
 ipcMain.handle(
   'internal:plugin:load-code',
   async (event, pluginPath: string) => {
-    const absPath = path.isAbsolute(pluginPath)
-      ? pluginPath
-      : path.join(process.cwd(), pluginPath);
+    const possiblePaths: string[] = [];
 
-    let code = await fs.readFile(absPath, 'utf-8');
-
-    if (pluginPath.endsWith('.ts')) {
-      const { code: transformedCode } = await esbuild.transform(code, {
-        loader: 'ts',
-        format: 'esm',
-      });
-
-      code = transformedCode;
+    if (path.isAbsolute(pluginPath)) {
+      possiblePaths.push(pluginPath);
+    } else {
+      possiblePaths.push(path.join(process.cwd(), pluginPath));
     }
 
-    return code;
+    possiblePaths.push(
+      path.join(__dirname, pluginPath),
+      path.join(process.resourcesPath, pluginPath),
+      path.join(process.resourcesPath, 'app.asar', pluginPath),
+      path.join(process.resourcesPath, 'app.asar.unpacked', pluginPath),
+    );
+
+    try {
+      // eslint-disable-next-line
+      const { app } = require('electron');
+
+      if (app?.getAppPath) {
+        possiblePaths.push(path.join(app.getAppPath() as string, pluginPath));
+      }
+    } catch {
+      // Do nothing...
+    }
+
+    for (const tryPath of possiblePaths) {
+      try {
+        const code = await fs.readFile(tryPath, 'utf-8');
+        return code;
+      } catch {
+        continue;
+      }
+    }
+
+    throw new Error(
+      `Unable to find plugin file "${pluginPath}". Tried the following paths:\n${possiblePaths.map((p) => `  - ${p}`).join('\n')}`,
+    );
   },
 );

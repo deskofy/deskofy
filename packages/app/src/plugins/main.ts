@@ -18,19 +18,70 @@ const loadMainPlugins = (deskofyApp: App): void => {
 
   userConfig.plugins.forEach(async (pluginPath): Promise<void> => {
     try {
-      const resolvedPath = path.isAbsolute(pluginPath)
-        ? pluginPath
-        : path.resolve(process.cwd(), pluginPath);
+      const mappedPath = path.join(...pluginPath);
 
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const module = await import(resolvedPath);
+      const possiblePaths: string[] = [];
+
+      if (path.isAbsolute(mappedPath)) {
+        possiblePaths.push(mappedPath);
+      } else {
+        possiblePaths.push(path.resolve(process.cwd(), mappedPath));
+      }
+
+      possiblePaths.push(
+        path.join(__dirname, mappedPath) as string,
+        path.join(process.resourcesPath, mappedPath) as string,
+        path.join(process.resourcesPath, 'app.asar', mappedPath) as string,
+        path.join(
+          process.resourcesPath,
+          'app.asar.unpacked',
+          mappedPath,
+        ) as string,
+      );
+
+      try {
+        // eslint-disable-next-line
+        const { app } = require('electron');
+
+        if (app?.getAppPath) {
+          possiblePaths.push(path.join(app.getAppPath() as string, mappedPath));
+        }
+      } catch {
+        // Do nothing...
+      }
+
+      let module: any = null;
+      let successfulPath: string | null = null;
+
+      for (const tryPath of possiblePaths) {
+        try {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          module = await import(tryPath);
+          successfulPath = tryPath;
+          printLog(`Main plugin loaded successfully from: ${tryPath}`);
+          break;
+        } catch {
+          continue;
+        }
+      }
+
+      if (!module || !successfulPath) {
+        throw new Error(
+          `Unable to find main plugin. Tried paths:\n${possiblePaths.map((p) => `  - ${p}`).join('\n')}`,
+        );
+      }
+
       const plugin = module.default as TPlugin;
 
       if (typeof plugin.init === 'function') {
         plugin.init(deskofyApp);
+      } else {
+        printLog(
+          `Main plugin at "${successfulPath}" does not have an init function`,
+        );
       }
     } catch (e) {
-      printLog(`unable to load main plugin: ${pluginPath}`, e);
+      printLog(`Unable to load main plugin: ${pluginPath.join('/')}`, e);
     }
   });
 };

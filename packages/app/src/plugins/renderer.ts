@@ -14,15 +14,22 @@ const initializeRendererPlugins = async (): Promise<void> => {
   const { rendererPlugins = [] } = userConfig;
 
   for (const pluginPath of rendererPlugins) {
+    if (!pluginPath || pluginPath.length === 0) {
+      continue;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const mappedPluginPath = pluginPath.join('/');
+
     try {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const code = await ipcRenderer.invoke(
         'internal:plugin:load-code',
-        pluginPath,
+        mappedPluginPath,
       );
 
       if (!code) {
-        console.warn(`plugin file not found: ${pluginPath}`);
+        console.warn(`plugin file not found: ${mappedPluginPath}`);
         continue;
       }
 
@@ -37,10 +44,10 @@ const initializeRendererPlugins = async (): Promise<void> => {
       const plugin = module.default as TPlugin;
 
       if (typeof plugin.init === 'function') {
-        customRendererPlugins[pluginPath] = plugin.init(ipcRenderer);
+        customRendererPlugins[mappedPluginPath] = plugin.init(ipcRenderer);
       }
     } catch (e) {
-      console.warn(`unable to load renderer plugin: ${pluginPath}`, e);
+      console.warn(`unable to load renderer plugin: ${mappedPluginPath}`, e);
     }
   }
 };

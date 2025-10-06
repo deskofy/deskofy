@@ -1,6 +1,6 @@
 {
   "name": "@deskofy/app",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": false,
   "description": "The Electron Framework",
   "author": "Deskofy",
@@ -31,7 +31,7 @@
     "app:build": "tsc",
     "app:build:watch": "tsc -w",
     "app:preload": "node esbuild.js",
-    "app:run": "cross-env DESKOFY_APP_CONFIG=test/deskofy.config.json5 electron ./dist/main.js",
+    "app:run": "cross-env DESKOFY_APP_CONFIG=test/deskofy.config.json5 electron ./dist/index.js",
     "app:start": "cross-env ENV=testing && npm run app:preload && npm run app:build && npm run app:run",
     "app:types": "tsc --noEmit --skipLibCheck",
     "app:lint": "eslint .",
@@ -40,12 +40,13 @@
     "app:npm:publish": "npm run app:build && npm run app:preload && npm publish --access public"
   },
   "dependencies": {
-    "ajv": "8.17.1",
+    "@deskofy/config": "*",
     "cross-env": "10.0.0",
-    "electron": "38.1.1",
-    "json5": "2.2.3"
+    "json5": "2.2.3",
+    "esbuild": "0.25.10",
+    "fs-extra": "11.3.2"
   },
   "devDependencies": {
-    "esbuild": "0.25.10"
+    "electron": "38.1.1"
   }
 }
