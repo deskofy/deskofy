@@ -9,6 +9,7 @@
   "scripts": {
     "app:build": "turbo run app:build",
     "app:build:watch": "turbo run app:build:watch",
+    "app:preload": "turbo run app:preload",
     "app:run": "turbo run app:run",
     "app:start": "turbo run app:start",
     "app:types": "turbo run app:types",
@@ -19,11 +20,15 @@
     "cli:types": "turbo run cli:types",
     "cli:lint": "turbo run cli:lint",
     "cli:fmt": "turbo run cli:fmt",
-    "test:cli:01": "npx deskofy run tests/01/deskofy.config.json5"
+    "test:cli:01": "npx deskofy run tests/01/deskofy.config.json5",
+    "config:build": "turbo run config:build",
+    "config:build:watch": "turbo run config:build:watch",
+    "config:types": "turbo run config:types",
+    "config:lint": "turbo run config:lint",
+    "config:fmt": "turbo run config:fmt"
   },
   "devDependencies": {
     "turbo": "2.5.8",
-    "@eslint/compat": "1.2.9",
     "@trivago/prettier-plugin-sort-imports": "5.2.2",
     "eslint": "9.28.0",
     "prettier": "3.5.3",
