@@ -1,0 +1,43 @@
+{
+  "name": "@deskofy/config",
+  "version": "0.0.1",
+  "private": false,
+  "description": "Deskofy Configuration File",
+  "author": "Deskofy",
+  "license": "SEE LICENSE",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deskofy/deskofy.git"
+  },
+  "bugs": "https://github.com/deskofy/deskofy/issues",
+  "homepage": "https://deskofy.app",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/types/index.d.ts"
+    }
+  },
+  "keywords": [
+    "config",
+    "deskofy",
+    "tvative"
+  ],
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "config:build": "tsc",
+    "config:build:watch": "tsc -w",
+    "config:types": "tsc --noEmit --skipLibCheck",
+    "config:lint": "eslint .",
+    "config:fmt": "prettier --write .",
+    "config:npm:pack": "npm pack",
+    "config:npm:publish": "npm run config:build && npm publish --access public"
+  },
+  "dependencies": {
+    "ajv": "8.17.1"
+  }
+}

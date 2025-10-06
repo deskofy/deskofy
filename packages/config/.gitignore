@@ -1,0 +1,8 @@
+# Ignore files
+
+*deskofy.config.js
+
+# Ignore directories
+
+dist/
+node_modules/
