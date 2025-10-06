@@ -1,11 +1,13 @@
 type TDeskofyConfigSchema = {
   environment: string;
   name: string;
+  packageName: string;
+  version: string;
   domain: string;
   icons: {
-    mac: string | string[];
-    windows: string | string[];
-    linux: string | string[];
+    mac: string[];
+    windows: string[];
+    linux: string[];
   };
   windowStartup: {
     shouldShowBeforeLoadingComplete: boolean;
@@ -41,12 +43,12 @@ type TDeskofyConfigSchema = {
     shouldOpenNonAppLinksExternally: boolean;
   };
   htmlPages: {
-    splashScreen: string | string[];
-    offline: string | string[];
-    httpNotAllowed: string | string[];
+    splashScreen: string[];
+    offline: string[];
+    httpNotAllowed: string[];
   };
-  plugins: string[];
-  rendererPlugins: string[];
+  plugins: string[][];
+  rendererPlugins: string[][];
   development: {
     shouldOpenDevToolsWhenRun: boolean;
   };
@@ -63,34 +65,30 @@ const CONFIG_SCHEMA = {
   properties: {
     environment: { type: 'string' },
     name: { type: 'string' },
+    packageName: { type: 'string' },
+    version: { type: 'string', default: '0.0.0' },
     domain: { type: 'string' },
     icons: {
       type: 'object',
       properties: {
         mac: {
-          anyOf: [
-            { type: 'string' },
-            { type: 'array', items: { type: 'string' } },
-          ],
+          type: 'array',
+          items: { type: 'string' },
         },
         windows: {
-          anyOf: [
-            { type: 'string' },
-            { type: 'array', items: { type: 'string' } },
-          ],
+          type: 'array',
+          items: { type: 'string' },
         },
         linux: {
-          anyOf: [
-            { type: 'string' },
-            { type: 'array', items: { type: 'string' } },
-          ],
+          type: 'array',
+          items: { type: 'string' },
         },
       },
       additionalProperties: false,
       default: {
-        mac: '',
-        windows: '',
-        linux: '',
+        mac: [''],
+        windows: [''],
+        linux: [''],
       },
     },
     windowStartup: {
@@ -187,40 +185,40 @@ const CONFIG_SCHEMA = {
       type: 'object',
       properties: {
         splashScreen: {
-          anyOf: [
-            { type: 'string' },
-            { type: 'array', items: { type: 'string' } },
-          ],
+          type: 'array',
+          items: { type: 'string' },
         },
         offline: {
-          anyOf: [
-            { type: 'string' },
-            { type: 'array', items: { type: 'string' } },
-          ],
+          type: 'array',
+          items: { type: 'string' },
         },
         httpNotAllowed: {
-          anyOf: [
-            { type: 'string' },
-            { type: 'array', items: { type: 'string' } },
-          ],
+          type: 'array',
+          items: { type: 'string' },
         },
       },
       additionalProperties: false,
       default: {
-        splashScreen: '',
-        offline: '',
-        httpNotAllowed: '',
+        splashScreen: [''],
+        offline: [''],
+        httpNotAllowed: [''],
       },
     },
     plugins: {
       type: 'array',
-      items: { type: 'string' },
-      default: [],
+      items: {
+        type: 'array',
+        items: { type: 'string' },
+      },
+      default: [['']],
     },
     rendererPlugins: {
       type: 'array',
-      items: { type: 'string' },
-      default: [],
+      items: {
+        type: 'array',
+        items: { type: 'string' },
+      },
+      default: [['']],
     },
     development: {
       type: 'object',
