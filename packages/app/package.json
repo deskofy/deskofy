@@ -30,18 +30,22 @@
   "scripts": {
     "app:build": "tsc",
     "app:build:watch": "tsc -w",
+    "app:preload": "node esbuild.js",
     "app:run": "cross-env DESKOFY_APP_CONFIG=test/deskofy.config.json5 electron ./dist/main.js",
-    "app:start": "cross-env ENV=testing && npm run app:build && npm run app:run",
+    "app:start": "cross-env ENV=testing && npm run app:preload && npm run app:build && npm run app:run",
     "app:types": "tsc --noEmit --skipLibCheck",
     "app:lint": "eslint .",
     "app:fmt": "prettier --write .",
     "app:npm:pack": "npm pack",
-    "app:npm:publish": "npm publish --access public"
+    "app:npm:publish": "npm run app:build && npm run app:preload && npm publish --access public"
   },
   "dependencies": {
     "ajv": "8.17.1",
     "cross-env": "10.0.0",
     "electron": "38.1.1",
     "json5": "2.2.3"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.10"
   }
 }
