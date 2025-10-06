@@ -2,12 +2,16 @@ import {
   app,
   BrowserWindow,
   BrowserWindowConstructorOptions,
+  ipcMain,
   Menu,
   nativeTheme,
   shell,
 } from 'electron';
+import esbuild from 'esbuild';
+import fs from 'fs/promises';
 import path from 'path';
 
+import { TDeskofyConfigSchema } from './config/schema';
 import { CONFIG_ENVS } from './global';
 import { registerIpcContexts } from './ipc/register';
 import { loadConfig } from './load';
@@ -72,10 +76,8 @@ const browserWindowData: BrowserWindowConstructorOptions = {
     allowRunningInsecureContent:
       userConfig.highRisk.shouldAllowRunningInsecureContent,
     experimentalFeatures: userConfig.highRisk.shouldEnableExperimentalFeatures,
-    preload:
-      userConfig.environment === 'testing'
-        ? path.join(__dirname, 'preload.js')
-        : require.resolve('@deskofy/app/dist/preload.js'),
+    preload: path.join(__dirname, 'preload.js'),
+    sandbox: true,
   },
   show: userConfig.windowStartup.shouldShowBeforeLoadingComplete,
 };
@@ -144,6 +146,8 @@ const menu = Menu.buildFromTemplate(
 
 Menu.setApplicationMenu(menu);
 
+loadMainPlugins(app);
+
 app.setName(userConfig.name);
 
 app.whenReady().then(() => {
@@ -194,11 +198,37 @@ app.on('web-contents-created', (event, contents) => {
 });
 
 app.on('ready', () => {
-  loadMainPlugins(app);
-
   registerIpcContexts({
     parentWindow,
     browserWindowData: browserWindowData,
     isDarwin: appConfig.platform !== 'darwin',
   });
 });
+
+// The following custom IPC handlers facilitate communication and
+// data exchange between the Electron main process (Node.js) and the
+// renderer process (web view).
+
+ipcMain.handle('internal:config:get', (): TDeskofyConfigSchema => userConfig);
+
+ipcMain.handle(
+  'internal:plugin:load-code',
+  async (event, pluginPath: string) => {
+    const absPath = path.isAbsolute(pluginPath)
+      ? pluginPath
+      : path.join(process.cwd(), pluginPath);
+
+    let code = await fs.readFile(absPath, 'utf-8');
+
+    if (pluginPath.endsWith('.ts')) {
+      const { code: transformedCode } = await esbuild.transform(code, {
+        loader: 'ts',
+        format: 'esm',
+      });
+
+      code = transformedCode;
+    }
+
+    return code;
+  },
+);
