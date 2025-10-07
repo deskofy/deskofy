@@ -14,10 +14,7 @@ import { setupBuildConfig } from './helpers/setupBuildConfig';
 
 const appMainPath = require.resolve('@deskofy/app/dist/index.js');
 
-const buildProject = async (
-  config: string,
-  architecture: string,
-): Promise<void> => {
+const buildProject = async (config: string, target: string): Promise<void> => {
   const runningDir = process.cwd();
 
   const appDir = path.dirname(appMainPath);
@@ -89,7 +86,7 @@ const buildProject = async (
         task.title = 'Building deskofy application...';
 
         const buildConfig: CliOptions = await setupBuildConfig({
-          architecture,
+          target,
           projectConfig,
           appDir,
           outputDir,

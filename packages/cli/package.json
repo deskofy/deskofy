@@ -1,6 +1,6 @@
 {
   "name": "@deskofy/cli",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "private": false,
   "description": "The CLI Utility for Deskofy",
   "author": "Deskofy",

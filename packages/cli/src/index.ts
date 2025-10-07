@@ -2,17 +2,17 @@
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
-import {
-  buildCommand,
-  supportedBuildTargets,
-  TSupportedBuildPlatforms,
-} from './commands/build.js';
+import { buildCommand } from './commands/build.js';
 import { createCommand } from './commands/create.js';
 import { fmtCommand } from './commands/fmt.js';
 import { lintCommand } from './commands/lint.js';
 import { runCommand } from './commands/run.js';
 import { typesCommand } from './commands/types.js';
-import { returnPlatform } from './helpers/checkPlatform.js';
+import {
+  returnPlatform,
+  supportedBuildTargets,
+  TSupportedBuildPlatforms,
+} from './helpers/returnPlatform.js';
 import { printDefaultMessage } from './messages/default.js';
 import { printError, printLog, printWarning } from './utils/printLog.js';
 
