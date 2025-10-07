@@ -40,6 +40,27 @@
     "cli:fmt": {
       "cache": false
     },
+    "core:build": {
+      "cache": false
+    },
+    "core:build:watch": {
+      "cache": false
+    },
+    "core:types": {
+      "cache": false
+    },
+    "core:lint": {
+      "cache": false
+    },
+    "core:fmt": {
+      "cache": false
+    },
+    "core:npm:pack": {
+      "cache": false
+    },
+    "core:npm:publish": {
+      "cache": false
+    },
     "config:build": {
       "cache": false
     },

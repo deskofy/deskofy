@@ -1,19 +1,6 @@
-import {
-  ipcMain,
-  ipcRenderer,
-  Menu,
-  MenuItemConstructorOptions,
-} from 'electron';
+import { ipcMain, Menu, MenuItemConstructorOptions } from 'electron';
 
 import { setMenuTemplate } from '../../menu/menu';
-
-const menuIpcContext = {
-  setDynamic: (template: MenuItemConstructorOptions[]): void =>
-    ipcRenderer.send('menu:set-dynamic', template),
-  addDynamic: (template: MenuItemConstructorOptions[]): void =>
-    ipcRenderer.send('menu:add-dynamic', template),
-  clearDynamic: (): void => ipcRenderer.send('menu:clear-dynamic'),
-};
 
 const registerMenuIpcContext = (isDarwin: boolean): void => {
   let dynamicMenu: MenuItemConstructorOptions[] = [];
@@ -48,4 +35,4 @@ const registerMenuIpcContext = (isDarwin: boolean): void => {
   });
 };
 
-export { menuIpcContext, registerMenuIpcContext };
+export { registerMenuIpcContext };

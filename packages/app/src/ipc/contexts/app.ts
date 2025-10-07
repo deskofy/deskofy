@@ -1,14 +1,4 @@
-import { app, BrowserWindow, ipcMain, ipcRenderer } from 'electron';
-
-const appIpcContext = {
-  getAppUrl: async (): Promise<any> => ipcRenderer.invoke('app:get-url'),
-  quit: (): void => ipcRenderer.send('app:quit'),
-  restart: (): void => ipcRenderer.send('app:restart'),
-  getHistory: async (): Promise<any> => ipcRenderer.invoke('app:history:get'),
-  filterHistory: async (filters: any): Promise<any> =>
-    ipcRenderer.invoke('app:history:filter', filters),
-  cleanHistory: (): void => ipcRenderer.send('app:history:clean'),
-};
+import { app, BrowserWindow, ipcMain } from 'electron';
 
 const registerAppIpcContext = (): void => {
   ipcMain.handle('app:get-url', async (event): Promise<string> => {
@@ -79,4 +69,4 @@ const registerAppIpcContext = (): void => {
   });
 };
 
-export { appIpcContext, registerAppIpcContext };
+export { registerAppIpcContext };

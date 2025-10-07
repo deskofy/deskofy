@@ -1,0 +1,50 @@
+{
+  "name": "@deskofy/core",
+  "version": "0.0.0",
+  "private": false,
+  "description": "Deskofy Core Library",
+  "author": "Deskofy",
+  "license": "SEE LICENSE",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deskofy/deskofy.git"
+  },
+  "bugs": "https://github.com/deskofy/deskofy/issues",
+  "homepage": "https://deskofy.app",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "keywords": [
+    "core",
+    "electron",
+    "framework",
+    "web",
+    "server",
+    "node",
+    "front-end",
+    "backend",
+    "core",
+    "deskofy",
+    "tvative",
+    "typescript",
+    "javascript"
+  ],
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "core:build": "tsc",
+    "core:build:watch": "tsc -w",
+    "core:types": "tsc --noEmit --skipLibCheck",
+    "core:lint": "eslint .",
+    "core:fmt": "prettier --write .",
+    "core:npm:pack": "npm pack",
+    "core:npm:publish": "npm run core:build && npm publish --access public"
+  }
+}
