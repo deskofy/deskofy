@@ -1,8 +1,6 @@
-import { fixupPluginRules } from '@eslint/compat';
 import pluginTypescript from '@typescript-eslint/eslint-plugin';
 import parserTypescript from '@typescript-eslint/parser';
 import { ESLint } from 'eslint';
-import tseslint from 'typescript-eslint';
 
 /** @type {ESLint.ConfigData} */
 export default [
@@ -11,21 +9,11 @@ export default [
       '**/*.config.js',
       '**/*.config.mjs',
       '**/*.config.ts',
-      '**/build/**',
       '**/dist/**',
       '**/node_modules/**',
       '**/out/**',
       '**/public/**',
     ],
-  },
-  {
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-    },
-    files: ['**/*.{ts,tsx}', 'src/**/*.{ts,tsx}'],
   },
   {
     linterOptions: {
@@ -36,10 +24,13 @@ export default [
     },
   },
   {
-    name: 'ESLint Config - Electron JS',
+    name: 'ESLint Config - Deskofy CLI',
+    files: ['**/*.{ts,tsx}', 'src/**/*.{ts,tsx}'],
     languageOptions: {
       parser: parserTypescript,
       parserOptions: {
+        project: ['./tsconfig.json'],
+        tsconfigRootDir: import.meta.dirname,
         ecmaVersion: 'ES2023',
         sourceType: 'module',
       },
@@ -51,7 +42,6 @@ export default [
       'arrow-body-style': ['error', 'as-needed'],
       'consistent-return': 'off',
       'max-params': 'off',
-      'no-await-in-loop': 'error',
       'no-dupe-else-if': 'error',
       'no-duplicate-case': 'error',
       'no-duplicate-imports': 'error',

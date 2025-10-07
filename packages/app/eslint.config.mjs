@@ -9,21 +9,11 @@ export default [
       '**/*.config.js',
       '**/*.config.mjs',
       '**/*.config.ts',
-      '**/build/**',
       '**/dist/**',
       '**/node_modules/**',
       '**/out/**',
       '**/public/**',
     ],
-  },
-  {
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-    },
-    files: ['**/*.{ts,tsx}', 'src/**/*.{ts,tsx}'],
   },
   {
     linterOptions: {
