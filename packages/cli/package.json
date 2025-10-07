@@ -37,9 +37,9 @@
     "cli:types": "tsc --noEmit --skipLibCheck",
     "cli:lint": "eslint .",
     "cli:fmt": "prettier --write .",
-    "app:check:asar": "npx asar list /path/to/app.asar",
-    "app:npm:pack": "npm pack",
-    "app:npm:publish": "npm publish --access public"
+    "cli:check:asar": "npx asar list /path/to/app.asar",
+    "cli:npm:pack": "npm pack",
+    "cli:npm:publish": "npm publish --access public"
   },
   "dependencies": {
     "@deskofy/app": "*",
