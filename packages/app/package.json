@@ -1,11 +1,14 @@
 {
   "name": "@deskofy/app",
-  "version": "1.0.0",
-  "private": true,
+  "version": "0.0.1",
+  "private": false,
   "description": "The Electron Framework",
   "author": "Deskofy",
-  "license": "MIT",
-  "repository": "deskofy/deskofy",
+  "license": "SEE LICENSE",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deskofy/deskofy.git"
+  },
   "bugs": "https://github.com/deskofy/deskofy/issues",
   "homepage": "https://deskofy.app",
   "main": "dist/index.js",
@@ -27,17 +30,23 @@
   "scripts": {
     "app:build": "tsc",
     "app:build:watch": "tsc -w",
-    "app:run": "cross-env DESKOFY_APP_CONFIG=../test/deskofy.config.json5 electron ./dist/main.js",
-    "app:start": "cross-env ENV=testing && npm run app:build && npm run app:run",
+    "app:preload": "node esbuild.js",
+    "app:run": "cross-env DESKOFY_APP_CONFIG=test/deskofy.config.json5 electron ./dist/index.js",
+    "app:start": "cross-env ENV=testing && npm run app:preload && npm run app:build && npm run app:run",
     "app:types": "tsc --noEmit --skipLibCheck",
     "app:lint": "eslint .",
-    "app:fmt": "prettier --write ."
+    "app:fmt": "prettier --write .",
+    "app:npm:pack": "npm pack",
+    "app:npm:publish": "npm run app:build && npm run app:preload && npm publish --access public"
+  },
+  "dependencies": {
+    "@deskofy/config": "*",
+    "cross-env": "10.0.0",
+    "json5": "2.2.3",
+    "esbuild": "0.25.10",
+    "fs-extra": "11.3.2"
   },
   "devDependencies": {
-    "ajv": "8.17.1",
-    "cross-env": "10.0.0",
-    "electron-builder": "26.0.12",
-    "electron": "38.1.1",
-    "json5": "2.2.3"
+    "electron": "38.1.1"
   }
 }

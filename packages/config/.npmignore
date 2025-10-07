@@ -1,0 +1,11 @@
+# Ignore everything
+
+*
+
+# Re-include required files/directories
+
+!README.md
+!package.json
+!dist/
+!dist/**
+

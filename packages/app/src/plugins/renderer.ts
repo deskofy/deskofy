@@ -1,32 +1,57 @@
 import { IpcRenderer, ipcRenderer } from 'electron';
-import { CONFIG_ENVS } from 'global';
-import { loadConfig } from 'load';
-import path from 'path';
-import { printLog } from 'utils/print';
 
 type TPlugin = {
-  init: (app: IpcRenderer) => void;
+  init: (deskofyIpcRenderer: IpcRenderer) => void;
 };
-
-const { userConfig } = loadConfig(CONFIG_ENVS.CONFIG);
-
-const { rendererPlugins } = userConfig;
 
 let customRendererPlugins: Record<string, any> = {};
 
-rendererPlugins.forEach(async (pluginPath): Promise<void> => {
-  try {
-    const absolutePath = path.resolve(process.cwd(), pluginPath);
-    const plugin = (await import(absolutePath)) as TPlugin;
+const initializeRendererPlugins = async (): Promise<void> => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const userConfig = await ipcRenderer.invoke('internal:config:get');
 
-    if (typeof plugin.init === 'function') {
-      customRendererPlugins[pluginPath] = plugin.init(ipcRenderer);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { rendererPlugins = [] } = userConfig;
 
-      printLog(`renderer plugin loaded: ${pluginPath}`);
+  for (const pluginPath of rendererPlugins) {
+    if (!pluginPath || pluginPath.length === 0) {
+      continue;
     }
-  } catch {
-    printLog(`unable to load renderer plugin: ${pluginPath}`);
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const mappedPluginPath = pluginPath.join('/');
+
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      const code = await ipcRenderer.invoke(
+        'internal:plugin:load-code',
+        mappedPluginPath,
+      );
+
+      if (!code) {
+        console.warn(`plugin file not found: ${mappedPluginPath}`);
+        continue;
+      }
+
+      const blob = new Blob([code], { type: 'text/javascript' });
+      const blobUrl = URL.createObjectURL(blob);
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      const module = await import(blobUrl);
+
+      URL.revokeObjectURL(blobUrl);
+
+      const plugin = module.default as TPlugin;
+
+      if (typeof plugin.init === 'function') {
+        customRendererPlugins[mappedPluginPath] = plugin.init(ipcRenderer);
+      }
+    } catch (e) {
+      console.warn(`unable to load renderer plugin: ${mappedPluginPath}`, e);
+    }
   }
-});
+};
+
+initializeRendererPlugins();
 
 export { customRendererPlugins };

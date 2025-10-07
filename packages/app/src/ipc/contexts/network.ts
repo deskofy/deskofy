@@ -6,15 +6,9 @@ import {
   IpcRendererEvent,
   net,
 } from 'electron';
-import { networkInterfaces } from 'os';
 
 type TNetworkStatus = {
   online: boolean;
-};
-
-type TIPInfo = {
-  localIP: string | null;
-  publicIP: string | null;
 };
 
 const networkIpcContext = {
@@ -23,8 +17,6 @@ const networkIpcContext = {
   onStatusChange: (
     callback: (event: IpcRendererEvent, status: TNetworkStatus) => void,
   ): IpcRenderer => ipcRenderer.on('network:status-change', callback),
-  getIP: async (): Promise<TIPInfo> =>
-    ipcRenderer.invoke('network:getIP') as unknown as TIPInfo,
   speedTest: async (): Promise<any> => ipcRenderer.invoke('network:speedTest'),
 };
 
@@ -48,43 +40,6 @@ const registerNetworkIpcContext = (): void => {
       win.webContents.send('network:status-change', status);
     });
   }, 5000); // Check every 5 seconds
-
-  ipcMain.handle('network:getIP', async (): Promise<TIPInfo> => {
-    // Get local IP
-
-    const nets = networkInterfaces();
-    let localIP: string | null = null;
-
-    for (const name of Object.keys(nets)) {
-      const netInterface = nets[name];
-      if (!netInterface) {
-        continue;
-      }
-
-      for (const net of netInterface) {
-        // Skip internal and non-IPv4 addresses
-
-        if (net.family === 'IPv4' && !net.internal) {
-          localIP = net.address;
-          break;
-        }
-      }
-      if (localIP) break;
-    }
-
-    // Get public IP
-
-    let publicIP: string | null = null;
-    try {
-      const response = await net.fetch('https://api.ipify.org?format=json');
-      const data = (await response.json()) as { ip: string };
-      publicIP = data.ip;
-    } catch {
-      // Just ignore...
-    }
-
-    return { localIP, publicIP };
-  });
 
   ipcMain.handle('network:speedTest', async (): Promise<any> => {
     try {

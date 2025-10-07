@@ -26,6 +26,8 @@ const validateConfigSchema = (
 ): TValidateConfigSchemaResponse => {
   const ajv = new Ajv({
     allErrors: true,
+    useDefaults: true,
+    strict: false,
   });
 
   const validate = ajv.compile<TDeskofyConfigSchema>(CONFIG_SCHEMA);

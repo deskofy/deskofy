@@ -1,11 +1,14 @@
+import { TDeskofyConfigSchema } from '@deskofy/config';
 import {
   app,
   BrowserWindow,
   BrowserWindowConstructorOptions,
+  ipcMain,
   Menu,
   nativeTheme,
   shell,
 } from 'electron';
+import fs from 'fs-extra';
 import path from 'path';
 
 import { CONFIG_ENVS } from './global';
@@ -72,10 +75,8 @@ const browserWindowData: BrowserWindowConstructorOptions = {
     allowRunningInsecureContent:
       userConfig.highRisk.shouldAllowRunningInsecureContent,
     experimentalFeatures: userConfig.highRisk.shouldEnableExperimentalFeatures,
-    preload:
-      userConfig.environment === 'testing'
-        ? path.join(__dirname, 'preload.js')
-        : require.resolve('@deskofy/app/dist/preload.js'),
+    preload: path.join(__dirname, 'preload.js'),
+    sandbox: true,
   },
   show: userConfig.windowStartup.shouldShowBeforeLoadingComplete,
 };
@@ -144,6 +145,8 @@ const menu = Menu.buildFromTemplate(
 
 Menu.setApplicationMenu(menu);
 
+loadMainPlugins(app);
+
 app.setName(userConfig.name);
 
 app.whenReady().then(() => {
@@ -194,11 +197,59 @@ app.on('web-contents-created', (event, contents) => {
 });
 
 app.on('ready', () => {
-  loadMainPlugins(app);
-
   registerIpcContexts({
     parentWindow,
     browserWindowData: browserWindowData,
     isDarwin: appConfig.platform !== 'darwin',
   });
 });
+
+// The following custom IPC handlers facilitate communication and
+// data exchange between the Electron main process (Node.js) and the
+// renderer process (web view).
+
+ipcMain.handle('internal:config:get', (): TDeskofyConfigSchema => userConfig);
+
+ipcMain.handle(
+  'internal:plugin:load-code',
+  async (event, pluginPath: string) => {
+    const possiblePaths: string[] = [];
+
+    if (path.isAbsolute(pluginPath)) {
+      possiblePaths.push(pluginPath);
+    } else {
+      possiblePaths.push(path.join(process.cwd(), pluginPath));
+    }
+
+    possiblePaths.push(
+      path.join(__dirname, pluginPath),
+      path.join(process.resourcesPath, pluginPath),
+      path.join(process.resourcesPath, 'app.asar', pluginPath),
+      path.join(process.resourcesPath, 'app.asar.unpacked', pluginPath),
+    );
+
+    try {
+      // eslint-disable-next-line
+      const { app } = require('electron');
+
+      if (app?.getAppPath) {
+        possiblePaths.push(path.join(app.getAppPath() as string, pluginPath));
+      }
+    } catch {
+      // Do nothing...
+    }
+
+    for (const tryPath of possiblePaths) {
+      try {
+        const code = await fs.readFile(tryPath, 'utf-8');
+        return code;
+      } catch {
+        continue;
+      }
+    }
+
+    throw new Error(
+      `Unable to find plugin file "${pluginPath}". Tried the following paths:\n${possiblePaths.map((p) => `  - ${p}`).join('\n')}`,
+    );
+  },
+);

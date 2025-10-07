@@ -1,8 +1,11 @@
 # Ignore files
 
 *.DS_Store
+*.tsbuildinfo
 
 # Ignore directories
 
 .turbo/
 node_modules/
+
+tests/

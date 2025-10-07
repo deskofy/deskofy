@@ -3,9 +3,9 @@
 <p align="center">An Electron Framework for Modern Web-to-Desktop Apps</p>
 
 <p align="center">
-    <a href="https://deskofy.com" target="_blank">Platform</a>
+    <a href="https://deskofy.app" target="_blank">Platform</a>
     &nbsp;•&nbsp;
-    <a href="#" target="_blank">Docs (Coming Soon)</a>
+    <a href="https://docs.deskofy.app" target="_blank">Docs</a>
     &nbsp;•&nbsp;
     <a href="linkedin.com/company/deskofy" target="_blank">LinkedIn</a>
     &nbsp;•&nbsp;
@@ -14,24 +14,44 @@
 
 > [!NOTE]
 >
-> **Deskofy** is made for founders, indie developers, and early-stage startups building web-based products.
+> If you’re a **founder, indie developer, or startup** building web-based products, we’re working on **Deskofy Platform**, an infrastructure platform designed to simplify cross-platform development and deployment of native desktop apps using Electron.
 >
-> Join our waitlist at [deskofy.app](https://deskofy.app?utm_source=deskofy-repository), we’re building an infrastructure platform that handles everything from version control to cross-platform builds and deployments.
+> **Deskofy Platform** handles everything from version control to cross-platform builds and deployments, so you can focus on building your product, not managing complex setup.
+>
+> Join our waitlist at [deskofy.app](https://deskofy.app?utm_source=deskofy-repository)
 
 ## Overview
 
 **Deskofy TS (Deskofy TypeScript)** is a **cross-platform framework** built on top of **Electron** to help developers build and distribute **production-ready native desktop applications** with **minimal engineering effort**.
 
+## Quick Start
+
+```bash
+# Install Deskofy CLI globally
+
+npm install -g @deskofy/cli
+
+# Create a new Deskofy project
+
+npx deskofy create
+
+# Run your Deskofy project
+
+npx deskofy run
+
+# 🎉 Boom! Your first Deskofy application has been created successfully!
+```
+
 ## Repository Structure
 
 This monorepo **`deskofy/deskofy`** contains the following main packages:
 
-| Package                      | Description                                                                                    |
-| ---------------------------- | ---------------------------------------------------------------------------------------------- |
-| **Deskofy Framework**        | The core runtime framework built on Electron                                                   |
-| **Deskofy CLI Utility**      | Command-line tool to create, build, and deploy Deskofy apps                                    |
-| **Deskofy Core**             | TypeScript library to interact with native features of desktop application on website frontend |
-| **Deskofy React Components** | Prebuilt UI components for window chrome, title bars, menus, and system integrations           |
+| Name                         | Package          | Description                                                                                    |
+| ---------------------------- | ---------------- | ---------------------------------------------------------------------------------------------- |
+| **Deskofy Framework**        | `@deskofy/app`   | The core runtime framework built on Electron                                                   |
+| **Deskofy CLI Utility**      | `@deskofy/cli`   | Command-line tool to create, build, and deploy Deskofy apps                                    |
+| **Deskofy Core**             | `@deskofy/core`  | TypeScript library to interact with native features of desktop application on website frontend |
+| **Deskofy React Components** | `@deskofy/react` | Prebuilt UI components for window chrome, title bars, menus, and system integrations           |
 
 Deskofy is developed and maintained by the [Orbivon](https://orbivon.com?utm_source=deskofy-repository) team.
 The ecosystem includes:
@@ -39,9 +59,9 @@ The ecosystem includes:
 - **Open-Source Framework (this repository)**: freely available and extensible.
 - **Managed Infrastructure (closed-source)**: will be available at [deskofy.app](https://deskofy.app?utm_source=deskofy-repository), providing build orchestration, cloud deployments, and analytics.
 
-## Getting Started
+## Documentation
 
-> TODO
+To read the documentation, please visit [docs.deskofy.app](https://docs.deskofy.app).
 
 ## Contributing
 
@@ -57,7 +77,7 @@ For detailed guidelines, see [CONTRIBUTING.md](./CONTRIBUTING.md).
 ## Security
 
 If you discover a security issue, please **do not** open a public issue.
-Instead, report it privately via **[security@orbivon.com](mailto:security@orbivon.com)**.
+Instead, report it privately via **[security@deskofy.app](mailto:security@deskofy.app)**.
 We’ll acknowledge and fix validated vulnerabilities promptly.
 
 ## Code of Conduct
@@ -68,7 +88,7 @@ Please read our [Code of Conduct](./CODE_OF_CONDUCT.md) before contributing.
 ## License
 
 Deskofy is distributed under a **custom open-source license**,
-which you can find in the [LICENSE](./LICENSE) file.
+which you can find in the [LICENSE](https://github.com/deskofy/deskofy?tab=License-1-ov-file) file.
 
 > ⚠️ Please review the license carefully before using Deskofy in a commercial context.
 

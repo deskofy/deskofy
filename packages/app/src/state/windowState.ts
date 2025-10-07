@@ -1,5 +1,5 @@
 import { app, BrowserWindow } from 'electron';
-import fs from 'fs';
+import fs from 'fs-extra';
 import path from 'path';
 
 type TWindowStatePayload = {

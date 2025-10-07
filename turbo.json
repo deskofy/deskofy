@@ -7,6 +7,9 @@
     "app:build:watch": {
       "cache": false
     },
+    "app:preload": {
+      "cache": false
+    },
     "app:run": {
       "cache": false
     },
@@ -20,6 +23,36 @@
       "cache": false
     },
     "app:fmt": {
+      "cache": false
+    },
+    "cli:build": {
+      "cache": false
+    },
+    "cli:build:watch": {
+      "cache": false
+    },
+    "cli:types": {
+      "cache": false
+    },
+    "cli:lint": {
+      "cache": false
+    },
+    "cli:fmt": {
+      "cache": false
+    },
+    "config:build": {
+      "cache": false
+    },
+    "config:build:watch": {
+      "cache": false
+    },
+    "config:types": {
+      "cache": false
+    },
+    "config:lint": {
+      "cache": false
+    },
+    "config:fmt": {
       "cache": false
     }
   }
