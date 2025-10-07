@@ -43,10 +43,6 @@ const createTSConfig = async (
     path.join(payload.directoryToPerform, fileName),
     JSON.stringify(jsonFile, null, 2),
   );
-
-  if (!payload.isEmpty) {
-    // Create sample plugin files
-  }
 };
 
 export { createTSConfig };
