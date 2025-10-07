@@ -1,13 +1,13 @@
 import { contextBridge } from 'electron';
 
-import { appIpcContext } from './contexts/app';
-import { electronIpcContext } from './contexts/electron';
-import { menuIpcContext } from './contexts/menu';
-import { navigationIpcContext } from './contexts/navigation';
-import { networkIpcContext } from './contexts/network';
-import { notificationIpcContext } from './contexts/notification';
-import { versionIpcContext } from './contexts/version';
-import { windowIpcContext } from './contexts/window';
+import { appIpcContext } from './preload/app';
+import { electronIpcContext } from './preload/electron';
+import { menuIpcContext } from './preload/menu';
+import { navigationIpcContext } from './preload/navigation';
+import { networkIpcContext } from './preload/network';
+import { notificationIpcContext } from './preload/notification';
+import { versionIpcContext } from './preload/version';
+import { windowIpcContext } from './preload/window';
 
 const exposeIpcContexts = (): void => {
   contextBridge.exposeInMainWorld('deskofyVersion', versionIpcContext);

@@ -1,24 +1,6 @@
-import {
-  BrowserWindow,
-  ipcMain,
-  ipcRenderer,
-  IpcRenderer,
-  IpcRendererEvent,
-  net,
-} from 'electron';
+import { BrowserWindow, ipcMain, net } from 'electron';
 
-type TNetworkStatus = {
-  online: boolean;
-};
-
-const networkIpcContext = {
-  getStatus: async (): Promise<TNetworkStatus> =>
-    ipcRenderer.invoke('network:status') as unknown as TNetworkStatus,
-  onStatusChange: (
-    callback: (event: IpcRendererEvent, status: TNetworkStatus) => void,
-  ): IpcRenderer => ipcRenderer.on('network:status-change', callback),
-  speedTest: async (): Promise<any> => ipcRenderer.invoke('network:speedTest'),
-};
+import { TNetworkStatus } from '../preload/network';
 
 const registerNetworkIpcContext = (): void => {
   ipcMain.handle(
@@ -71,4 +53,4 @@ const registerNetworkIpcContext = (): void => {
   });
 };
 
-export { networkIpcContext, registerNetworkIpcContext };
+export { registerNetworkIpcContext };
