@@ -25,7 +25,8 @@
     "config:build:watch": "turbo run config:build:watch",
     "config:types": "turbo run config:types",
     "config:lint": "turbo run config:lint",
-    "config:fmt": "turbo run config:fmt"
+    "config:fmt": "turbo run config:fmt",
+    "all:lint": "npm run app:lint && npm run cli:lint && npm run config:lint"
   },
   "devDependencies": {
     "turbo": "2.5.8",
