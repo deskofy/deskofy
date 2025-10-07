@@ -10,16 +10,25 @@ const createPackageJSON = async (
 
   const jsonFile: object = {
     name: payload.packageName,
-    version: '0.0.0',
+    description: payload.projectDescription,
+    author: payload.projectAuthor,
+    version: payload.projectVersion,
     private: true,
     scripts: {
       'app:setup': 'npx deskofy setup',
-      'app:compile': 'npx deskofy compile deskofy.config.json5',
-      'app:run': 'npx deskofy run deskofy.config.json5',
+      'app:run': 'npx deskofy run',
       'app:build': 'npx deskofy build',
     },
-    devDependencies: {
+    dependencies: {
       '@deskofy/app': 'latest',
+      '@deskofy/config': 'latest',
+    },
+    devDependencies: {
+      ...(payload.isEmpty === false && {
+        eslint: '9.37.0',
+        prettier: '3.6.2',
+        typescript: '5.9.3',
+      }),
     },
   };
 

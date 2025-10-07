@@ -1,17 +1,22 @@
+import chalk from 'chalk';
 import { delay, Listr } from 'listr2';
 
+import { runNpmInstall } from '../../helpers/spawns/npmInstall';
 import { isDirectoryEmpty } from '../../utils/isDirectoryEmpty';
-import { printError } from '../../utils/printLog';
+import { printError, printLog } from '../../utils/printLog';
 import { createDeskofyConfig } from './helpers/createDeskofyConfig';
 import { createESLintConfig } from './helpers/createESlintConfig';
 import { createPackageJSON } from './helpers/createPackageJSON';
+import { createPlugins } from './helpers/createPlugins';
 import { createPrettierConfig } from './helpers/createPrettierConfig';
 import { createTSConfig } from './helpers/createTSConfig';
-import { installNPMDependencies } from './helpers/installNPMDependencies';
 
 type TProjectCreatePayload = {
   directoryToPerform: string;
+  projectVersion: string;
   projectName: string;
+  projectDescription: string;
+  projectAuthor: string;
   packageName: string;
   domain: string;
   isEmpty: boolean;
@@ -25,34 +30,42 @@ const createCleanProject = async (
     return;
   }
 
-  let tasks = new Listr([]);
+  printLog(
+    `\n${chalk.cyan("✨ Let's create your")} ${chalk.green.bold('Deskofy')} ${chalk.cyan('project! 🚀')}\n`,
+  );
+
+  let tasks = new Listr([], {
+    rendererOptions: {
+      showSubtasks: true,
+    },
+  });
 
   if (payload.isEmpty) {
     tasks.add([
       {
         task: async (undefined, task): Promise<void> => {
-          task.title = 'Creating package.json';
-          await delay(1000);
+          task.output = 'Creating package.json';
+          await delay(100);
 
           await createPackageJSON(payload);
-          task.title = 'package.json created';
+          task.output = 'package.json created';
         },
       },
       {
         task: async (undefined, task): Promise<void> => {
-          task.title = 'Creating Deskofy configuration file';
-          await delay(1000);
+          task.output = 'Creating Deskofy configuration file';
+          await delay(100);
 
           await createDeskofyConfig(payload);
-          task.title = 'Deskofy config created';
+          task.output = 'Deskofy config created';
         },
       },
       {
         task: async (undefined, task): Promise<void> => {
-          task.title = 'Installing dependencies...';
-          await delay(1000);
+          task.output = 'Installing dependencies...';
+          await delay(100);
 
-          installNPMDependencies(payload);
+          await runNpmInstall(payload);
         },
       },
     ]);
@@ -62,55 +75,64 @@ const createCleanProject = async (
     tasks.add([
       {
         task: async (undefined, task): Promise<void> => {
-          task.title = 'Creating package.json';
-          await delay(1000);
+          task.output = 'Creating package.json';
+          await delay(300);
 
           await createPackageJSON(payload);
-          task.title = 'package.json created';
+          task.output = 'package.json created';
         },
       },
       {
         task: async (undefined, task): Promise<void> => {
-          task.title = 'Creating Prettier configuration';
-          await delay(1000);
+          task.output = 'Creating Prettier configuration';
+          await delay(300);
 
           await createPrettierConfig(payload);
-          task.title = 'Prettier config created';
+          task.output = 'Prettier config created';
         },
       },
       {
         task: async (undefined, task): Promise<void> => {
-          task.title = 'Creating ESLint configuration';
-          await delay(1000);
+          task.output = 'Creating ESLint configuration';
+          await delay(300);
 
           await createESLintConfig(payload);
-          task.title = 'ESLint config created';
+          task.output = 'ESLint config created';
         },
       },
       {
         task: async (undefined, task): Promise<void> => {
-          task.title = 'Creating TypeScript configuration';
-          await delay(1000);
+          task.output = 'Creating TypeScript configuration';
+          await delay(300);
 
           await createTSConfig(payload);
-          task.title = 'TypeScript config created';
+          task.output = 'TypeScript config created';
         },
       },
       {
         task: async (undefined, task): Promise<void> => {
-          task.title = 'Creating Deskofy configuration file';
-          await delay(1000);
+          task.output = 'Creating Deskofy configuration file';
+          await delay(300);
 
           await createDeskofyConfig(payload);
-          task.title = 'Deskofy config created';
+          task.output = 'Deskofy config created';
         },
       },
       {
         task: async (undefined, task): Promise<void> => {
-          task.title = 'Installing dependencies...';
-          await delay(1000);
+          task.output = 'Create Deskofy plugins';
+          await delay(300);
 
-          installNPMDependencies(payload);
+          await createPlugins(payload);
+          task.output = 'Deskofy plugins created';
+        },
+      },
+      {
+        task: async (undefined, task): Promise<void> => {
+          task.output = 'Installing dependencies...\n';
+          await delay(300);
+
+          await runNpmInstall(payload);
         },
       },
     ]);

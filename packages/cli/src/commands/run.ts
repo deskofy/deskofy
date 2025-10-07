@@ -1,6 +1,6 @@
-import { runProjectFromConfig } from '../flows/projectRun/runProjectFromConfig';
+import { runProjectFromConfig } from '../flows/run/runProjectFromConfig';
 
-const runCommand = (projectConfig: string | undefined): void =>
-  runProjectFromConfig(projectConfig);
+const runCommand = async (projectConfig: string | undefined): Promise<void> =>
+  await runProjectFromConfig(projectConfig);
 
 export { runCommand };

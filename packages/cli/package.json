@@ -37,11 +37,13 @@
     "cli:types": "tsc --noEmit --skipLibCheck",
     "cli:lint": "eslint .",
     "cli:fmt": "prettier --write .",
+    "app:check:asar": "npx asar list /path/to/app.asar",
     "app:npm:pack": "npm pack",
     "app:npm:publish": "npm publish --access public"
   },
   "dependencies": {
     "@deskofy/app": "*",
+    "@deskofy/config": "*",
     "yargs": "18.0.0",
     "ajv": "8.17.1",
     "cross-env": "10.0.0",
@@ -49,7 +51,10 @@
     "@inquirer/prompts": "7.8.6",
     "chalk": "5.6.2",
     "listr2": "9.0.4",
-    "cross-spawn": "7.0.6"
+    "cross-spawn": "7.0.6",
+    "electron-builder": "26.0.12",
+    "fs-extra": "11.3.2",
+    "electron": "38.1.1"
   },
   "devDependencies": {
     "@types/yargs": "17.0.33",

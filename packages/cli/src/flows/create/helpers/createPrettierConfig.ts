@@ -6,9 +6,20 @@ import { TProjectCreatePayload } from '../createCleanProject';
 const createPrettierConfig = async (
   payload: TProjectCreatePayload,
 ): Promise<void> => {
-  const fileName = '';
+  const fileName = '.prettierrc';
 
-  const jsonFile = {};
+  const jsonFile = {
+    arrowParens: 'always',
+    bracketSameLine: false,
+    bracketSpacing: true,
+    printWidth: 80,
+    quoteProps: 'as-needed',
+    semi: true,
+    singleQuote: true,
+    tabWidth: 2,
+    trailingComma: 'all',
+    useTabs: false,
+  };
 
   await fs.writeFile(
     path.join(payload.directoryToPerform, fileName),
