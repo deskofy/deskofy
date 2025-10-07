@@ -21,12 +21,19 @@
     "cli:lint": "turbo run cli:lint",
     "cli:fmt": "turbo run cli:fmt",
     "test:cli:01": "npx deskofy run tests/01/deskofy.config.json5",
+    "core:build": "turbo run core:build",
+    "core:build:watch": "turbo run core:build:watch",
+    "core:types": "turbo run core:types",
+    "core:lint": "turbo run core:lint",
+    "core:fmt": "turbo run core:fmt",
+    "core:npm:pack": "turbo run core:npm:pack",
+    "core:npm:publish": "turbo run core:npm:publish",
     "config:build": "turbo run config:build",
     "config:build:watch": "turbo run config:build:watch",
     "config:types": "turbo run config:types",
     "config:lint": "turbo run config:lint",
     "config:fmt": "turbo run config:fmt",
-    "all:lint": "npm run app:lint && npm run cli:lint && npm run config:lint"
+    "all:lint": "npm run app:lint && npm run cli:lint && npm run core:lint && npm run config:lint"
   },
   "devDependencies": {
     "turbo": "2.5.8",
