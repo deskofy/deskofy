@@ -61,6 +61,27 @@
     "core:npm:publish": {
       "cache": false
     },
+    "react:build": {
+      "cache": false
+    },
+    "react:build:watch": {
+      "cache": false
+    },
+    "react:types": {
+      "cache": false
+    },
+    "react:lint": {
+      "cache": false
+    },
+    "react:fmt": {
+      "cache": false
+    },
+    "react:npm:pack": {
+      "cache": false
+    },
+    "react:npm:publish": {
+      "cache": false
+    },
     "config:build": {
       "cache": false
     },
