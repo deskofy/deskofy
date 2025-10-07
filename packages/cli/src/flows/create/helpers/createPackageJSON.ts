@@ -14,6 +14,9 @@ const createPackageJSON = async (
     author: payload.projectAuthor,
     version: payload.projectVersion,
     private: true,
+    engines: {
+      node: '>=22.18.0',
+    },
     scripts: {
       'app:setup': 'npx deskofy setup',
       'app:run': 'npx deskofy run',
@@ -22,12 +25,18 @@ const createPackageJSON = async (
     dependencies: {
       '@deskofy/app': 'latest',
       '@deskofy/config': 'latest',
+      'cross-env': '10.0.0',
+      json5: '2.2.3',
+      esbuild: '0.25.10',
+      'fs-extra': '11.3.2',
     },
     devDependencies: {
       ...(payload.isEmpty === false && {
         eslint: '9.37.0',
         prettier: '3.6.2',
         typescript: '5.9.3',
+        '@types/node': '24.7.0',
+        electron: '38.1.1',
       }),
     },
   };
