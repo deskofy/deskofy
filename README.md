@@ -3,9 +3,9 @@
 <p align="center">An Electron Framework for Modern Web-to-Desktop Apps</p>
 
 <p align="center">
-    <a href="https://deskofy.com" target="_blank">Platform</a>
+    <a href="https://deskofy.app" target="_blank">Platform</a>
     &nbsp;•&nbsp;
-    <a href="#" target="_blank">Docs (Coming Soon)</a>
+    <a href="https://docs.deskofy.app" target="_blank">Docs</a>
     &nbsp;•&nbsp;
     <a href="linkedin.com/company/deskofy" target="_blank">LinkedIn</a>
     &nbsp;•&nbsp;
@@ -14,9 +14,11 @@
 
 > [!NOTE]
 >
-> **Deskofy** is made for founders, indie developers, and early-stage startups building web-based products.
+> If you’re a **founder, indie developer, or startup** building web-based products, we’re working on **Deskofy Platform**, an infrastructure platform designed to simplify cross-platform development and deployment of native desktop apps using Electron.
 >
-> Join our waitlist at [deskofy.app](https://deskofy.app?utm_source=deskofy-repository), we’re building an infrastructure platform that handles everything from version control to cross-platform builds and deployments.
+> **Deskofy Platform** handles everything from version control to cross-platform builds and deployments, so you can focus on building your product, not managing complex setup.
+>
+> Join our waitlist at [deskofy.app](https://deskofy.app?utm_source=deskofy-repository)
 
 ## Overview
 
@@ -35,7 +37,7 @@ npx deskofy create
 
 # Run your Deskofy project
 
-npx deskofy run deskofy.config.json5
+npx deskofy run
 
 # 🎉 Boom! Your first Deskofy application has been created successfully!
 ```
@@ -44,12 +46,12 @@ npx deskofy run deskofy.config.json5
 
 This monorepo **`deskofy/deskofy`** contains the following main packages:
 
-| Package                      | Description                                                                                    |
-| ---------------------------- | ---------------------------------------------------------------------------------------------- |
-| **Deskofy Framework**        | The core runtime framework built on Electron                                                   |
-| **Deskofy CLI Utility**      | Command-line tool to create, build, and deploy Deskofy apps                                    |
-| **Deskofy Core**             | TypeScript library to interact with native features of desktop application on website frontend |
-| **Deskofy React Components** | Prebuilt UI components for window chrome, title bars, menus, and system integrations           |
+| Name                         | Package          | Description                                                                                    |
+| ---------------------------- | ---------------- | ---------------------------------------------------------------------------------------------- |
+| **Deskofy Framework**        | `@deskofy/app`   | The core runtime framework built on Electron                                                   |
+| **Deskofy CLI Utility**      | `@deskofy/cli`   | Command-line tool to create, build, and deploy Deskofy apps                                    |
+| **Deskofy Core**             | `@deskofy/core`  | TypeScript library to interact with native features of desktop application on website frontend |
+| **Deskofy React Components** | `@deskofy/react` | Prebuilt UI components for window chrome, title bars, menus, and system integrations           |
 
 Deskofy is developed and maintained by the [Orbivon](https://orbivon.com?utm_source=deskofy-repository) team.
 The ecosystem includes:
@@ -59,7 +61,7 @@ The ecosystem includes:
 
 ## Documentation
 
-The documentation will be available soon.
+To read the documentation, please visit [docs.deskofy.app](https://docs.deskofy.app).
 
 ## Contributing
 
@@ -75,7 +77,7 @@ For detailed guidelines, see [CONTRIBUTING.md](./CONTRIBUTING.md).
 ## Security
 
 If you discover a security issue, please **do not** open a public issue.
-Instead, report it privately via **[security@orbivon.com](mailto:security@orbivon.com)**.
+Instead, report it privately via **[security@deskofy.app](mailto:security@deskofy.app)**.
 We’ll acknowledge and fix validated vulnerabilities promptly.
 
 ## Code of Conduct
