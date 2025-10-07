@@ -1,8 +1,8 @@
 import { TDeskofyConfigSchema } from '@deskofy/config';
 import { CliOptions, MacOsTargetName } from 'electron-builder';
-import path from 'path';
 
 import { returnArchitecture } from '../../../helpers/returnArchitecture';
+import { normalizePathArray } from '../../../utils/normalizePathArray';
 
 const setupBuildConfig = async (payload: {
   architecture: string;
@@ -30,11 +30,12 @@ const setupBuildConfig = async (payload: {
         main: 'index.js',
       },
       win: {
-        icon: path.join(...payload.projectConfig.icons.windows) ?? null,
+        icon:
+          normalizePathArray(payload.projectConfig.icons.windows) ?? undefined,
         target: returnArchitecture(payload.architecture),
       },
       mac: {
-        icon: path.join(...payload.projectConfig.icons.mac) ?? null,
+        icon: normalizePathArray(payload.projectConfig.icons.mac) ?? null,
         target: returnArchitecture(payload.architecture) as MacOsTargetName,
         type:
           payload.projectConfig.environment === 'development'
@@ -42,7 +43,8 @@ const setupBuildConfig = async (payload: {
             : 'distribution',
       },
       linux: {
-        icon: path.join(...payload.projectConfig.icons.windows) ?? null,
+        icon:
+          normalizePathArray(payload.projectConfig.icons.windows) ?? undefined,
         target: returnArchitecture(payload.architecture),
       },
       asar: true,
