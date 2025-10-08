@@ -2,7 +2,7 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in Deskofy, please report it responsibly by emailing **[security@orbivon.com](mailto:security@orbivon.com)**. Do not open a public issue for security problems.
+If you discover a security vulnerability in Deskofy, please report it responsibly by emailing **[security@deskofy.app](mailto:security@deskofy.app)**. Do not open a public issue for security problems.
 
 ## Supported Versions
 
