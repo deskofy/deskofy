@@ -1,1 +1,1 @@
-export * from './TitleBar/index';
+export * from './TitleBar/component';
