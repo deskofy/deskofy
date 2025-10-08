@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "tests/**/*"
   ],
   "packageManager": "npm@10.0.0",
   "scripts": {
@@ -28,12 +29,19 @@
     "core:fmt": "turbo run core:fmt",
     "core:npm:pack": "turbo run core:npm:pack",
     "core:npm:publish": "turbo run core:npm:publish",
+    "react:build": "turbo run react:build",
+    "react:build:watch": "turbo run react:build:watch",
+    "react:types": "turbo run react:types",
+    "react:lint": "turbo run react:lint",
+    "react:fmt": "turbo run react:fmt",
+    "react:npm:pack": "turbo run react:npm:pack",
+    "react:npm:publish": "turbo run react:npm:publish",
     "config:build": "turbo run config:build",
     "config:build:watch": "turbo run config:build:watch",
     "config:types": "turbo run config:types",
     "config:lint": "turbo run config:lint",
     "config:fmt": "turbo run config:fmt",
-    "all:lint": "npm run app:lint && npm run cli:lint && npm run core:lint && npm run config:lint"
+    "all:lint": "npm run app:lint && npm run cli:lint && npm run core:lint && npm run react:lint && npm run config:lint"
   },
   "devDependencies": {
     "turbo": "2.5.8",

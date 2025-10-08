@@ -7,5 +7,3 @@
 
 .turbo/
 node_modules/
-
-tests/

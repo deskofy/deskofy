@@ -26,21 +26,25 @@
 
 ## Quick Start
 
+**Step 01**: Install Deskofy CLI globally
+
 ```bash
-# Install Deskofy CLI globally
-
 npm install -g @deskofy/cli
-
-# Create a new Deskofy project
-
-npx deskofy create
-
-# Run your Deskofy project
-
-npx deskofy run
-
-# 🎉 Boom! Your first Deskofy application has been created successfully!
 ```
+
+**Step 02**: Create a new Deskofy project
+
+```bash
+deskofy create # or `npx deskofy create`
+```
+
+**Step 03**: Run your Deskofy project
+
+```bash
+deskofy run # or `npx deskofy run`
+```
+
+_🎉 Boom! Your first Deskofy application has been created successfully!_
 
 ## Repository Structure
 
@@ -51,7 +55,7 @@ This monorepo **`deskofy/deskofy`** contains the following main packages:
 | **Deskofy Framework**        | `@deskofy/app`   | The core runtime framework built on Electron                                                   |
 | **Deskofy CLI Utility**      | `@deskofy/cli`   | Command-line tool to create, build, and deploy Deskofy apps                                    |
 | **Deskofy Core**             | `@deskofy/core`  | TypeScript library to interact with native features of desktop application on website frontend |
-| **Deskofy React Components** | `@deskofy/react` | Prebuilt UI components for window chrome, title bars, menus, and system integrations           |
+| **Deskofy React Components** | `@deskofy/react` | Prebuilt React-based UI components                                                             |
 
 Deskofy is developed and maintained by the [Orbivon](https://orbivon.com?utm_source=deskofy-repository) team.
 The ecosystem includes:
@@ -87,10 +91,8 @@ Please read our [Code of Conduct](./CODE_OF_CONDUCT.md) before contributing.
 
 ## License
 
-Deskofy is distributed under a **custom open-source license**,
+Deskofy (TS) is distributed under the **MIT open-source license**,
 which you can find in the [LICENSE](https://github.com/deskofy/deskofy?tab=License-1-ov-file) file.
-
-> ⚠️ Please review the license carefully before using Deskofy in a commercial context.
 
 <br />
 
