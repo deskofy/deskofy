@@ -33,11 +33,11 @@ npm install -g @deskofy/cli
 
 # Create a new Deskofy project
 
-npx deskofy create
+deskofy create # or `npx deskofy create`
 
 # Run your Deskofy project
 
-npx deskofy run
+deskofy run # or `npx deskofy run`
 
 # 🎉 Boom! Your first Deskofy application has been created successfully!
 ```
