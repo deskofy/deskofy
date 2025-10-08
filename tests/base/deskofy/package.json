@@ -1,0 +1,23 @@
+{
+  "name": "test-app",
+  "description": "A Deskofy Application",
+  "author": "Deskofy",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "app:run": "npx deskofy run",
+    "app:build": "npx deskofy build"
+  },
+  "dependencies": {
+    "@deskofy/app": "latest",
+    "@deskofy/config": "latest",
+    "cross-env": "10.0.0",
+    "json5": "2.2.3",
+    "esbuild": "0.25.10",
+    "fs-extra": "11.3.2"
+  },
+  "devDependencies": {}
+}
