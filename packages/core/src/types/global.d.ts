@@ -7,7 +7,7 @@ import {
   TDeskofyPlugins,
   TDeskofyVersion,
   TDeskofyWindow,
-} from './ipc';
+} from '../ipc';
 
 declare global {
   interface Window {
@@ -23,5 +23,3 @@ declare global {
     deskofyWindow: TDeskofyWindow;
   }
 }
-
-export {};
