@@ -5,6 +5,7 @@ import { runNpmInstall } from '../../helpers/spawns/npmInstall';
 import { printLog } from '../../utils/printLog';
 import { createDeskofyConfig } from './helpers/createDeskofyConfig';
 import { createESLintConfig } from './helpers/createESlintConfig';
+import { createGitIgnore } from './helpers/createGitIgnore';
 import { createPackageJSON } from './helpers/createPackageJSON';
 import { createPlugins } from './helpers/createPlugins';
 import { createPrettierConfig } from './helpers/createPrettierConfig';
@@ -38,6 +39,15 @@ const createCleanProject = async (
     tasks.add([
       {
         task: async (undefined, task): Promise<void> => {
+          task.output = 'Creating .gitignore';
+          await delay(300);
+
+          await createGitIgnore(payload);
+          task.output = '.gitignore created';
+        },
+      },
+      {
+        task: async (undefined, task): Promise<void> => {
           task.output = 'Creating package.json';
           await delay(100);
 
@@ -67,6 +77,15 @@ const createCleanProject = async (
 
   if (!payload.isEmpty) {
     tasks.add([
+      {
+        task: async (undefined, task): Promise<void> => {
+          task.output = 'Creating .gitignore';
+          await delay(300);
+
+          await createGitIgnore(payload);
+          task.output = '.gitignore created';
+        },
+      },
       {
         task: async (undefined, task): Promise<void> => {
           task.output = 'Creating package.json';
@@ -123,7 +142,7 @@ const createCleanProject = async (
       },
       {
         task: async (undefined, task): Promise<void> => {
-          task.output = 'Installing dependencies...\n';
+          task.output = 'Installing dependencies...';
           await delay(300);
 
           await runNpmInstall(payload);
