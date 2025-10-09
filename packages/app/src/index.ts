@@ -12,12 +12,15 @@ import fs from 'fs-extra';
 import path from 'path';
 
 import { CONFIG_ENVS } from './global';
+import { htmlError } from './html/error';
 import { registerIpcContexts } from './ipc/register';
 import { loadConfig } from './load';
 import { setMenuTemplate } from './menu/menu';
 import { loadMainPlugins } from './plugins/main';
 import { loadWindowState, saveWindowState } from './state/windowState';
 import { appPath } from './utils/appPath';
+import { encodeHTML } from './utils/encodeHTML';
+import { isFileExists } from './utils/isFileExists';
 
 const { appConfig, userConfig } = loadConfig(CONFIG_ENVS.CONFIG);
 
@@ -98,7 +101,12 @@ const createWindow = (): void => {
     userConfig.windowStartup.shouldShowBeforeLoadingComplete &&
     userConfig.htmlPages.splashScreen
   ) {
-    parentWindow.loadURL(appPath(userConfig.htmlPages.splashScreen));
+    const splashScreenPath = appPath(userConfig.htmlPages.splashScreen);
+    if (isFileExists(splashScreenPath)) {
+      parentWindow.loadURL(splashScreenPath);
+    } else {
+      parentWindow?.loadURL(encodeHTML(splashScreenPath));
+    }
   }
 
   parentWindow.loadURL(
@@ -109,15 +117,24 @@ const createWindow = (): void => {
 
   parentWindow.webContents.on(
     'did-fail-load',
-    (_event, undefined, undefiend, validatedURL) => {
-      if (validatedURL.startsWith('http')) {
-        if (!userConfig.highRisk.shouldLoadHTTPDomains) {
-          parentWindow?.loadFile(htmlPageForNotAllowedStatus);
-          return;
+    (_event, undefined, errorDescription, validatedURL) => {
+      const isHttp = validatedURL.startsWith('http');
+
+      if (isHttp && !userConfig.highRisk.shouldLoadHTTPDomains) {
+        if (isFileExists(htmlPageForNotAllowedStatus)) {
+          parentWindow.loadFile(htmlPageForNotAllowedStatus);
+        } else {
+          parentWindow.loadURL(encodeHTML(htmlError(errorDescription)));
         }
+
+        return;
       }
 
-      parentWindow?.loadFile(htmlPageForOfflineStatus);
+      if (isFileExists(htmlPageForOfflineStatus)) {
+        parentWindow.loadFile(htmlPageForOfflineStatus);
+      } else {
+        parentWindow.loadURL(encodeHTML(htmlError(errorDescription)));
+      }
     },
   );
 
@@ -246,14 +263,12 @@ ipcMain.handle(
     for (const tryPath of possiblePaths) {
       try {
         const code = await fs.readFile(tryPath, 'utf-8');
+
+        // eslint-disable-next-line @typescript-eslint/consistent-return
         return code;
       } catch {
         continue;
       }
     }
-
-    throw new Error(
-      `Unable to find plugin file "${pluginPath}". Tried the following paths:\n${possiblePaths.map((p) => `  - ${p}`).join('\n')}`,
-    );
   },
 );
