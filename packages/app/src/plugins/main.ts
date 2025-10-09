@@ -66,9 +66,7 @@ const loadMainPlugins = (deskofyApp: App): void => {
       }
 
       if (!module || !successfulPath) {
-        throw new Error(
-          `Unable to find main plugin. Tried paths:\n${possiblePaths.map((p) => `  - ${p}`).join('\n')}`,
-        );
+        return;
       }
 
       const plugin = module.default as TPlugin;
@@ -80,8 +78,8 @@ const loadMainPlugins = (deskofyApp: App): void => {
           `Main plugin at "${successfulPath}" does not have an init function`,
         );
       }
-    } catch (e) {
-      printLog(`Unable to load main plugin: ${pluginPath.join('/')}`, e);
+    } catch {
+      return;
     }
   });
 };
