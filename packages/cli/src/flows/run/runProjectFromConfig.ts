@@ -3,6 +3,7 @@ import { Listr } from 'listr2';
 import path from 'path';
 
 import { runNpxTsc } from '../../helpers/spawns/npxTsc';
+import { isFileExists } from '../../utils/isFileExists';
 
 const runProjectFromConfig = async (
   projectConfig: string | undefined,
@@ -24,6 +25,10 @@ const runProjectFromConfig = async (
   tasks.add([
     {
       task: async (undefined, task): Promise<void> => {
+        if (!isFileExists('tsconfig.json')) {
+          return;
+        }
+
         task.title = 'Building source files...';
 
         try {
