@@ -2,6 +2,7 @@ import { input, select, Separator } from '@inquirer/prompts';
 
 import { createCleanProject } from '../flows/create/createCleanProject';
 import { isDirectoryEmpty } from '../utils/isDirectoryEmpty';
+import { normalizePackageName } from '../utils/normalizePackageName';
 import { printError } from '../utils/printLog';
 
 const createCommand = async (): Promise<void> => {
@@ -89,6 +90,7 @@ const createCommand = async (): Promise<void> => {
     const readPackageName = await input({
       message: 'Enter the package identifier (e.g. "my-app"):',
       required: true,
+      default: normalizePackageName(readProjectName),
       validate: (value: string) => {
         if (!value || value.trim().length === 0) {
           return 'Package identifier is required';
