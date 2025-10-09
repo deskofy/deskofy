@@ -2,8 +2,7 @@ import chalk from 'chalk';
 import { delay, Listr } from 'listr2';
 
 import { runNpmInstall } from '../../helpers/spawns/npmInstall';
-import { isDirectoryEmpty } from '../../utils/isDirectoryEmpty';
-import { printError, printLog } from '../../utils/printLog';
+import { printLog } from '../../utils/printLog';
 import { createDeskofyConfig } from './helpers/createDeskofyConfig';
 import { createESLintConfig } from './helpers/createESlintConfig';
 import { createPackageJSON } from './helpers/createPackageJSON';
@@ -25,11 +24,6 @@ type TProjectCreatePayload = {
 const createCleanProject = async (
   payload: TProjectCreatePayload,
 ): Promise<void> => {
-  if (!isDirectoryEmpty(payload.directoryToPerform)) {
-    printError('Deskofy can only create new projects in an empty folder.');
-    return;
-  }
-
   printLog(
     `\n${chalk.cyan("✨ Let's create your")} ${chalk.green.bold('Deskofy')} ${chalk.cyan('project! 🚀')}\n`,
   );
