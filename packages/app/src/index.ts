@@ -213,6 +213,10 @@ ipcMain.handle('internal:config:get', (): TDeskofyConfigSchema => userConfig);
 ipcMain.handle(
   'internal:plugin:load-code',
   async (event, pluginPath: string) => {
+    if (!pluginPath || pluginPath.trim().length <= 0) {
+      return;
+    }
+
     const possiblePaths: string[] = [];
 
     if (path.isAbsolute(pluginPath)) {
