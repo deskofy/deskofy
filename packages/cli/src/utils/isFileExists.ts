@@ -13,7 +13,7 @@ const isFileExists = (fileName: string): boolean => {
     // Just ignore...
   }
 
-  return true;
+  return false;
 };
 
 export { isFileExists };
