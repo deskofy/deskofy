@@ -1,6 +1,5 @@
 import {
   TDeskofyApp,
-  TDeskofyMenu,
   TDeskofyNavigation,
   TDeskofyNetwork,
   TDeskofyNotification,
@@ -15,7 +14,6 @@ declare global {
       plugins?: TDeskofyPlugins;
     };
     deskofyApp: TDeskofyApp;
-    deskofyMenu: TDeskofyMenu;
     deskofyNavigation: TDeskofyNavigation;
     deskofyNetwork: TDeskofyNetwork;
     deskofyNotification: TDeskofyNotification;
