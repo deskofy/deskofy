@@ -85,7 +85,21 @@ const TitleBarContainer = (props: TProps): JSX.Element => {
   );
 
   return (
-    <div className={`title-bar__container ${className}`} style={containerStyle}>
+    <div
+      className={className}
+      style={containerStyle}
+      onDoubleClick={(): void => {
+        const { maximize, unmaximize } = (window as any).deskofyWindow || {};
+
+        if ((window as any).__isMaximized) {
+          unmaximize?.();
+          (window as any).__isMaximized = false;
+        } else {
+          maximize?.();
+          (window as any).__isMaximized = true;
+        }
+      }}
+    >
       {visibleComponents.map((comp, index) => {
         const componentStyle: CSSProperties = {
           WebkitAppRegion: comp.isDragable === false ? 'no-drag' : undefined,
@@ -106,7 +120,7 @@ const TitleBarContainer = (props: TProps): JSX.Element => {
   );
 };
 
-const TitleBar = (props: TProps): JSX.Element => {
+const DeskofyTitleBar = (props: TProps): JSX.Element => {
   const { isVisible = true } = props;
 
   if (!isVisible) {
@@ -118,8 +132,8 @@ const TitleBar = (props: TProps): JSX.Element => {
 
 TitleBarContainer.displayName = 'TitleBarContainer';
 
-TitleBar.displayName = 'TitleBar';
+DeskofyTitleBar.displayName = 'DeskofyTitleBar';
 
 export type { TContentAlignment, TComponent, TProps as TTitleBarProps };
 
-export { ContentAlignment, TitleBar };
+export { ContentAlignment, DeskofyTitleBar };
