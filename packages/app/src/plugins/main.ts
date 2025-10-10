@@ -47,7 +47,7 @@ const loadMainPlugins = (deskofyApp: App): void => {
           possiblePaths.push(path.join(app.getAppPath() as string, mappedPath));
         }
       } catch {
-        // Do nothing...
+        // Just ignore...
       }
 
       let module: any = null;
@@ -65,23 +65,19 @@ const loadMainPlugins = (deskofyApp: App): void => {
         }
       }
 
-      if (!module || !successfulPath) {
-        throw new Error(
-          `Unable to find main plugin. Tried paths:\n${possiblePaths.map((p) => `  - ${p}`).join('\n')}`,
-        );
-      }
+      if (module) {
+        const plugin = module.default as TPlugin;
 
-      const plugin = module.default as TPlugin;
-
-      if (typeof plugin.init === 'function') {
-        plugin.init(deskofyApp);
-      } else {
-        printLog(
-          `Main plugin at "${successfulPath}" does not have an init function`,
-        );
+        if (typeof plugin.init === 'function') {
+          plugin.init(deskofyApp);
+        } else {
+          printLog(
+            `Main plugin at "${successfulPath}" does not have an init function`,
+          );
+        }
       }
-    } catch (e) {
-      printLog(`Unable to load main plugin: ${pluginPath.join('/')}`, e);
+    } catch {
+      // Just ignore...
     }
   });
 };

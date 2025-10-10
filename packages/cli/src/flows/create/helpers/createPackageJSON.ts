@@ -18,8 +18,8 @@ const createPackageJSON = async (
       node: '>=22.18.0',
     },
     scripts: {
-      'app:run': 'npx deskofy run',
-      'app:build': 'npx deskofy build',
+      start: 'npx deskofy run',
+      build: 'npx deskofy build',
     },
     dependencies: {
       '@deskofy/app': 'latest',

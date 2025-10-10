@@ -21,4 +21,5 @@ const deskofyNetwork = (): TDeskofyNetwork | undefined => {
 };
 
 export type { TDeskofyNetwork };
+
 export { deskofyNetwork };

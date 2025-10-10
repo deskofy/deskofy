@@ -12,12 +12,17 @@ import fs from 'fs-extra';
 import path from 'path';
 
 import { CONFIG_ENVS } from './global';
+import { htmlError } from './html/error';
+import { htmlSplashScreen } from './html/splash';
 import { registerIpcContexts } from './ipc/register';
 import { loadConfig } from './load';
 import { setMenuTemplate } from './menu/menu';
 import { loadMainPlugins } from './plugins/main';
+import { specificHTMLPages } from './specific/htmlPages';
 import { loadWindowState, saveWindowState } from './state/windowState';
 import { appPath } from './utils/appPath';
+import { encodeHTML } from './utils/encodeHTML';
+import { isFileExists } from './utils/isFileExists';
 
 const { appConfig, userConfig } = loadConfig(CONFIG_ENVS.CONFIG);
 
@@ -88,17 +93,19 @@ const createWindow = (): void => {
     ...browserWindowData,
   });
 
-  const htmlPageForOfflineStatus = appPath(userConfig.htmlPages.offline);
+  const htmlPageForOfflineStatus = appPath(specificHTMLPages.OFFLINE);
 
   const htmlPageForNotAllowedStatus = appPath(
-    userConfig.htmlPages.httpNotAllowed,
+    specificHTMLPages.NOT_ALLOWED_STATUS,
   );
 
-  if (
-    userConfig.windowStartup.shouldShowBeforeLoadingComplete &&
-    userConfig.htmlPages.splashScreen
-  ) {
-    parentWindow.loadURL(appPath(userConfig.htmlPages.splashScreen));
+  if (userConfig.windowStartup.shouldShowBeforeLoadingComplete) {
+    const splashScreenPath = appPath(specificHTMLPages.SPLASH_SCREEN);
+    if (isFileExists(splashScreenPath)) {
+      parentWindow.loadURL(htmlSplashScreen);
+    } else {
+      parentWindow?.loadURL(encodeHTML(htmlSplashScreen));
+    }
   }
 
   parentWindow.loadURL(
@@ -109,15 +116,23 @@ const createWindow = (): void => {
 
   parentWindow.webContents.on(
     'did-fail-load',
-    (_event, undefined, undefiend, validatedURL) => {
-      if (validatedURL.startsWith('http')) {
-        if (!userConfig.highRisk.shouldLoadHTTPDomains) {
-          parentWindow?.loadFile(htmlPageForNotAllowedStatus);
-          return;
+    (_event, undefined, errorDescription, validatedURL) => {
+      const isHttp = validatedURL.startsWith('http');
+      if (isHttp && !userConfig.highRisk.shouldLoadHTTPDomains) {
+        if (isFileExists(htmlPageForNotAllowedStatus)) {
+          parentWindow.loadFile(htmlPageForNotAllowedStatus);
+        } else {
+          parentWindow.loadURL(encodeHTML(htmlError(errorDescription)));
         }
+
+        return;
       }
 
-      parentWindow?.loadFile(htmlPageForOfflineStatus);
+      if (isFileExists(htmlPageForOfflineStatus)) {
+        parentWindow.loadFile(htmlPageForOfflineStatus);
+      } else {
+        parentWindow.loadURL(encodeHTML(htmlError(errorDescription)));
+      }
     },
   );
 
@@ -213,6 +228,10 @@ ipcMain.handle('internal:config:get', (): TDeskofyConfigSchema => userConfig);
 ipcMain.handle(
   'internal:plugin:load-code',
   async (event, pluginPath: string) => {
+    if (!pluginPath || pluginPath.trim().length <= 0) {
+      return;
+    }
+
     const possiblePaths: string[] = [];
 
     if (path.isAbsolute(pluginPath)) {
@@ -236,20 +255,18 @@ ipcMain.handle(
         possiblePaths.push(path.join(app.getAppPath() as string, pluginPath));
       }
     } catch {
-      // Do nothing...
+      // Just ignore...
     }
 
     for (const tryPath of possiblePaths) {
       try {
         const code = await fs.readFile(tryPath, 'utf-8');
+
+        // eslint-disable-next-line @typescript-eslint/consistent-return
         return code;
       } catch {
         continue;
       }
     }
-
-    throw new Error(
-      `Unable to find plugin file "${pluginPath}". Tried the following paths:\n${possiblePaths.map((p) => `  - ${p}`).join('\n')}`,
-    );
   },
 );

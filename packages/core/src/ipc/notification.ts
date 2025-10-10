@@ -45,4 +45,5 @@ const deskofyNotification = (): TDeskofyNotification | undefined => {
 };
 
 export type { TDeskofyNotification };
+
 export { deskofyNotification };

@@ -40,7 +40,7 @@ const loadConfig = (configPath: string): TLoadConfigResponse => {
       );
     }
   } catch {
-    // Do nothing...
+    // Just ignore...
   }
 
   let parsedJSON: TDeskofyConfigSchema | null = null;

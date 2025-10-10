@@ -1,6 +1,6 @@
 {
   "name": "@deskofy/app",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "private": false,
   "description": "The Electron Framework",
   "author": "Deskofy",

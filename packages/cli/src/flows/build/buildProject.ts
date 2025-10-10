@@ -6,6 +6,7 @@ import path from 'path';
 
 import { loadConfig } from '../../helpers/loadConfig';
 import { runNpxTsc } from '../../helpers/spawns/npxTsc';
+import { isFileExists } from '../../utils/isFileExists';
 import { printError, printLog } from '../../utils/printLog';
 import { copyPackageJSON } from './helpers/copyPackageJSON';
 import { copyRuntimeFiles } from './helpers/copyRuntimeFiles';
@@ -56,6 +57,10 @@ const buildProject = async (config: string, target: string): Promise<void> => {
     },
     {
       task: async (undefined, task): Promise<void> => {
+        if (!isFileExists('tsconfig.json')) {
+          return;
+        }
+
         task.title = 'Building source files...';
 
         try {

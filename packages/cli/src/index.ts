@@ -21,7 +21,7 @@ const yargsInstance = yargs(hideBin(process.argv));
 yargsInstance
   .scriptName('deskofy')
   .usage('\nUsage: $0 <command> [options]')
-  .version('1.0.0')
+  .version('0.0.6')
   .alias('v', 'version')
   .alias('h', 'help')
   .epilogue(

@@ -1,6 +1,6 @@
 {
   "name": "@deskofy/cli",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "private": false,
   "description": "The CLI Utility for Deskofy",
   "author": "Deskofy",
@@ -45,7 +45,6 @@
     "@deskofy/app": "*",
     "@deskofy/config": "*",
     "yargs": "18.0.0",
-    "ajv": "8.17.1",
     "cross-env": "10.0.0",
     "json5": "2.2.3",
     "@inquirer/prompts": "7.8.6",

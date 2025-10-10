@@ -1,13 +1,12 @@
 import {
   TDeskofyApp,
-  TDeskofyMenu,
   TDeskofyNavigation,
   TDeskofyNetwork,
   TDeskofyNotification,
   TDeskofyPlugins,
   TDeskofyVersion,
   TDeskofyWindow,
-} from './ipc';
+} from '../ipc';
 
 declare global {
   interface Window {
@@ -15,7 +14,6 @@ declare global {
       plugins?: TDeskofyPlugins;
     };
     deskofyApp: TDeskofyApp;
-    deskofyMenu: TDeskofyMenu;
     deskofyNavigation: TDeskofyNavigation;
     deskofyNetwork: TDeskofyNetwork;
     deskofyNotification: TDeskofyNotification;
@@ -23,5 +21,3 @@ declare global {
     deskofyWindow: TDeskofyWindow;
   }
 }
-
-export {};

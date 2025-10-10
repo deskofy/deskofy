@@ -33,4 +33,5 @@ const deskofyWindow = (): TDeskofyWindow | undefined => {
 };
 
 export type { TDeskofyWindow };
+
 export { deskofyWindow };
