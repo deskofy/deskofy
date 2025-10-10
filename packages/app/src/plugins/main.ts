@@ -47,7 +47,7 @@ const loadMainPlugins = (deskofyApp: App): void => {
           possiblePaths.push(path.join(app.getAppPath() as string, mappedPath));
         }
       } catch {
-        // Do nothing...
+        // Just ignore...
       }
 
       let module: any = null;
@@ -77,7 +77,7 @@ const loadMainPlugins = (deskofyApp: App): void => {
         }
       }
     } catch {
-      // Do nothing...
+      // Just ignore...
     }
   });
 };
