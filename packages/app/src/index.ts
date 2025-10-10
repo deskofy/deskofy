@@ -13,10 +13,12 @@ import path from 'path';
 
 import { CONFIG_ENVS } from './global';
 import { htmlError } from './html/error';
+import { htmlSplashScreen } from './html/splash';
 import { registerIpcContexts } from './ipc/register';
 import { loadConfig } from './load';
 import { setMenuTemplate } from './menu/menu';
 import { loadMainPlugins } from './plugins/main';
+import { specificHTMLPages } from './specific/htmlPages';
 import { loadWindowState, saveWindowState } from './state/windowState';
 import { appPath } from './utils/appPath';
 import { encodeHTML } from './utils/encodeHTML';
@@ -91,21 +93,18 @@ const createWindow = (): void => {
     ...browserWindowData,
   });
 
-  const htmlPageForOfflineStatus = appPath(userConfig.htmlPages.offline);
+  const htmlPageForOfflineStatus = appPath(specificHTMLPages.OFFLINE);
 
   const htmlPageForNotAllowedStatus = appPath(
-    userConfig.htmlPages.httpNotAllowed,
+    specificHTMLPages.NOT_ALLOWED_STATUS,
   );
 
-  if (
-    userConfig.windowStartup.shouldShowBeforeLoadingComplete &&
-    userConfig.htmlPages.splashScreen
-  ) {
-    const splashScreenPath = appPath(userConfig.htmlPages.splashScreen);
+  if (userConfig.windowStartup.shouldShowBeforeLoadingComplete) {
+    const splashScreenPath = appPath(specificHTMLPages.SPLASH_SCREEN);
     if (isFileExists(splashScreenPath)) {
-      parentWindow.loadURL(splashScreenPath);
+      parentWindow.loadURL(htmlSplashScreen);
     } else {
-      parentWindow?.loadURL(encodeHTML(splashScreenPath));
+      parentWindow?.loadURL(encodeHTML(htmlSplashScreen));
     }
   }
 
@@ -119,7 +118,6 @@ const createWindow = (): void => {
     'did-fail-load',
     (_event, undefined, errorDescription, validatedURL) => {
       const isHttp = validatedURL.startsWith('http');
-
       if (isHttp && !userConfig.highRisk.shouldLoadHTTPDomains) {
         if (isFileExists(htmlPageForNotAllowedStatus)) {
           parentWindow.loadFile(htmlPageForNotAllowedStatus);
@@ -257,7 +255,7 @@ ipcMain.handle(
         possiblePaths.push(path.join(app.getAppPath() as string, pluginPath));
       }
     } catch {
-      // Do nothing...
+      // Just ignore...
     }
 
     for (const tryPath of possiblePaths) {
