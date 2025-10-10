@@ -5,7 +5,7 @@ import {
   returnArchitecture,
   returnPlatform,
 } from '../../../helpers/returnPlatform';
-import { normalizePathArray } from '../../../utils/normalizePathArray';
+import { normalizePathArrayAndCheck } from '../../../utils/normalizePathArrayAndCheck';
 
 const setupBuildConfig = async (payload: {
   target: string;
@@ -30,21 +30,22 @@ const setupBuildConfig = async (payload: {
         '!node_modules/*/{test,__tests__,tests}/**',
       ],
       extraMetadata: {
-        name: payload.projectConfig.packageName,
+        name: payload.projectConfig.name,
         version: payload.projectConfig.version,
         main: 'index.js',
       },
       ...(currentPlatform === 'windows' && {
         win: {
           icon:
-            normalizePathArray(payload.projectConfig.icons.windows) ??
+            normalizePathArrayAndCheck(payload.projectConfig.icons.windows) ??
             undefined,
           target: returnArchitecture(payload.target),
         },
       }),
       ...(currentPlatform === 'mac' && {
         mac: {
-          icon: normalizePathArray(payload.projectConfig.icons.mac) ?? null,
+          icon:
+            normalizePathArrayAndCheck(payload.projectConfig.icons.mac) ?? null,
           target: returnArchitecture(payload.target) as MacOsTargetName,
           type:
             payload.projectConfig.environment === 'development'
@@ -55,7 +56,8 @@ const setupBuildConfig = async (payload: {
       ...(currentPlatform === 'linux' && {
         linux: {
           icon:
-            normalizePathArray(payload.projectConfig.icons.linux) ?? undefined,
+            normalizePathArrayAndCheck(payload.projectConfig.icons.linux) ??
+            undefined,
           target: returnArchitecture(payload.target),
         },
       }),
