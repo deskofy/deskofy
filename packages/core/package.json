@@ -1,6 +1,6 @@
 {
   "name": "@deskofy/core",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": false,
   "description": "Deskofy Core Library",
   "author": "Deskofy",
@@ -12,7 +12,7 @@
   "bugs": "https://github.com/deskofy/deskofy/issues",
   "homepage": "https://deskofy.app",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/types/global.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.js",
