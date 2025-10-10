@@ -2,7 +2,6 @@ import { contextBridge } from 'electron';
 
 import { appIpcContext } from './preload/app';
 import { electronIpcContext } from './preload/electron';
-import { menuIpcContext } from './preload/menu';
 import { navigationIpcContext } from './preload/navigation';
 import { networkIpcContext } from './preload/network';
 import { notificationIpcContext } from './preload/notification';
@@ -19,8 +18,6 @@ const exposeIpcContexts = (): void => {
   contextBridge.exposeInMainWorld('deskofyWindow', windowIpcContext);
 
   contextBridge.exposeInMainWorld('deskofyNavigation', navigationIpcContext);
-
-  contextBridge.exposeInMainWorld('deskofyMenu', menuIpcContext);
 
   contextBridge.exposeInMainWorld(
     'deskofyNotification',

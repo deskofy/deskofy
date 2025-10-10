@@ -1,7 +1,6 @@
 import { BrowserWindow, BrowserWindowConstructorOptions } from 'electron';
 
 import { registerAppIpcContext } from './contexts/app';
-import { registerMenuIpcContext } from './contexts/menu';
 import { registerNavigationIpcContext } from './contexts/navigation';
 import { registerNetworkIpcContext } from './contexts/network';
 import { registerNotificationIpcContext } from './contexts/notification';
@@ -17,7 +16,6 @@ const registerIpcContexts = (payload: TRegisterIpcContextPayload): void => {
   registerWindowIpcContext(payload.browserWindowData);
   registerAppIpcContext();
   registerNavigationIpcContext(payload.browserWindowData);
-  registerMenuIpcContext(payload.isDarwin);
   registerNotificationIpcContext(payload.parentWindow);
   registerNetworkIpcContext();
 };
