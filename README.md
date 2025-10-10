@@ -1,13 +1,19 @@
-<h1 align="center">Deskofy (TS)</h1>
+<p align="center">
+  <picture>
+    <img width="700px" alt="Deskofy Architecture" src="./.readme/orbivon.png">
+  </picture>
+</p>
 
-<p align="center">Your Web App, Now a Full-Fledged Desktop Experience.</p>
+<p align="center">Deskofy (TS) - Public Preview</p>
+
+<p align="center"><b>Your Web App, Now a Full-Fledged Desktop Experience.</b></p>
 
 <p align="center">
     <a href="https://deskofy.app" target="_blank">Platform</a>
     &nbsp;•&nbsp;
     <a href="https://docs.deskofy.app" target="_blank">Docs</a>
     &nbsp;•&nbsp;
-    <a href="linkedin.com/company/deskofy" target="_blank">LinkedIn</a>
+    <a href="https://linkedin.com/company/deskofy" target="_blank">LinkedIn</a>
     &nbsp;•&nbsp;
     <a href="https://x.com/DeskofyHQ" target="_blank">X</a>
 </p>
