@@ -58,9 +58,6 @@
     "core:npm:pack": {
       "cache": false
     },
-    "core:npm:publish": {
-      "cache": false
-    },
     "react:build": {
       "cache": false
     },
@@ -79,9 +76,6 @@
     "react:npm:pack": {
       "cache": false
     },
-    "react:npm:publish": {
-      "cache": false
-    },
     "config:build": {
       "cache": false
     },
@@ -95,6 +89,12 @@
       "cache": false
     },
     "config:fmt": {
+      "cache": false
+    },
+    "all:clean": {
+      "cache": false
+    },
+    "all:build": {
       "cache": false
     }
   }
