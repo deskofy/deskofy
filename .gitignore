@@ -6,4 +6,5 @@
 # Ignore directories
 
 .turbo/
+.next/
 node_modules/
