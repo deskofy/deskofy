@@ -9,4 +9,5 @@ const deskofyPlugins = (): TDeskofyPlugins | undefined => {
 };
 
 export type { TDeskofyPlugins };
+
 export { deskofyPlugins };
